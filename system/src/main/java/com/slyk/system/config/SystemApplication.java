@@ -1,4 +1,4 @@
-package com.slyk.system;
+package com.slyk.system.config;
 
 import org.mybatis.spring.annotation.MapperScan;
 import org.slf4j.Logger;
