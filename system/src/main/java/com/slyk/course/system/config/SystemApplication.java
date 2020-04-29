@@ -1,5 +1,6 @@
-package com.slyk.system;
+package com.slyk.course.system.config;
 
+import org.mybatis.spring.annotation.MapperScan;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.SpringApplication;
@@ -7,14 +8,15 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.core.env.ConfigurableEnvironment;
 
-@SpringBootApplication
+@SpringBootApplication(scanBasePackages = {"com.slyk.course.system", "com.slyk.course.server"})
 @EnableDiscoveryClient
-public class GatewayApplication {
+@MapperScan("com.slyk.course.server.mapper")
+public class SystemApplication {
 
-    private static Logger log = LoggerFactory.getLogger(GatewayApplication.class);
+    private static Logger log = LoggerFactory.getLogger(SystemApplication.class);
 
     public static void main(String[] args) {
-        SpringApplication springApplication = new SpringApplication(GatewayApplication.class);
+        SpringApplication springApplication = new SpringApplication(SystemApplication.class);
         ConfigurableEnvironment environment = springApplication.run(args).getEnvironment();
         log.info(
                 "{} 模块： http://{}:{} 启动成功！",

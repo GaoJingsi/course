@@ -1,12 +1,12 @@
-package com.slyk.system.controller;
+package com.slyk.course.system.controller;
 
-import com.slyk.server.service.TestService;
+import com.slyk.course.server.domain.Test;
+import com.slyk.course.server.service.TestService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
-import java.util.Map;
 
 @RestController
 public class TestController {
@@ -15,7 +15,7 @@ public class TestController {
     private TestService testService;
 
     @GetMapping("/test")
-    public List<Map<String, Object>> test() {
+    public List<Test> test() {
         return testService.test();
     }
 

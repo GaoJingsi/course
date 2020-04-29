@@ -1,14 +1,14 @@
-package com.slyk.server.service.impl;
+package com.slyk.course.server.service.impl;
 
-import com.slyk.server.mapper.TestMapper;
-import com.slyk.server.service.TestService;
+import com.slyk.course.server.domain.Test;
+import com.slyk.course.server.mapper.TestMapper;
+import com.slyk.course.server.service.TestService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.util.List;
-import java.util.Map;
 
 @Service
 public class TestServiceImpl implements TestService {
@@ -18,8 +18,8 @@ public class TestServiceImpl implements TestService {
     @Resource
     private TestMapper testMapper;
 
-    public List<Map<String, Object>> test() {
+    public List<Test> test() {
         log.info("测试热部署");
-        return testMapper.test();
+        return testMapper.selectByExample(null);
     }
 }

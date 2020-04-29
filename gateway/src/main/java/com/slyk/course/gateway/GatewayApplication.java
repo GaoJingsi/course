@@ -1,20 +1,20 @@
-package com.slyk.system;
+package com.slyk.course.gateway;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.cloud.netflix.eureka.server.EnableEurekaServer;
+import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.core.env.ConfigurableEnvironment;
 
 @SpringBootApplication
-@EnableEurekaServer
-public class EurekaServerApplication {
+@EnableDiscoveryClient
+public class GatewayApplication {
 
-    private static Logger log = LoggerFactory.getLogger(EurekaServerApplication.class);
+    private static Logger log = LoggerFactory.getLogger(GatewayApplication.class);
 
     public static void main(String[] args) {
-        SpringApplication springApplication = new SpringApplication(EurekaServerApplication.class);
+        SpringApplication springApplication = new SpringApplication(GatewayApplication.class);
         ConfigurableEnvironment environment = springApplication.run(args).getEnvironment();
         log.info(
                 "{} 模块： http://{}:{} 启动成功！",

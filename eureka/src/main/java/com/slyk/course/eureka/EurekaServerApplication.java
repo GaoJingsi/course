@@ -1,22 +1,20 @@
-package com.slyk.system.config;
+package com.slyk.course.eureka;
 
-import org.mybatis.spring.annotation.MapperScan;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
+import org.springframework.cloud.netflix.eureka.server.EnableEurekaServer;
 import org.springframework.core.env.ConfigurableEnvironment;
 
-@SpringBootApplication(scanBasePackages = {"com.slyk.system", "com.slyk.server"})
-@EnableDiscoveryClient
-@MapperScan("com.slyk.server.mapper")
-public class SystemApplication {
+@SpringBootApplication
+@EnableEurekaServer
+public class EurekaServerApplication {
 
-    private static Logger log = LoggerFactory.getLogger(SystemApplication.class);
+    private static Logger log = LoggerFactory.getLogger(EurekaServerApplication.class);
 
     public static void main(String[] args) {
-        SpringApplication springApplication = new SpringApplication(SystemApplication.class);
+        SpringApplication springApplication = new SpringApplication(EurekaServerApplication.class);
         ConfigurableEnvironment environment = springApplication.run(args).getEnvironment();
         log.info(
                 "{} 模块： http://{}:{} 启动成功！",
