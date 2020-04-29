@@ -1,6 +1,6 @@
-package com.slyk.course.controller;
+package com.slyk.system.controller;
 
-import com.slyk.course.service.TestService;
+import com.slyk.server.service.TestService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;

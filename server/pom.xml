@@ -9,16 +9,12 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>system</artifactId>
+    <artifactId>server</artifactId>
 
     <dependencies>
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
         </dependency>
         <!-- https://mvnrepository.com/artifact/org.mybatis.spring.boot/mybatis-spring-boot-starter -->
         <dependency>
@@ -35,10 +31,7 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-devtools</artifactId>
         </dependency>
-        <dependency>
-            <groupId>com.slyk.course</groupId>
-            <artifactId>server</artifactId>
-        </dependency>
+
     </dependencies>
 
 </project>

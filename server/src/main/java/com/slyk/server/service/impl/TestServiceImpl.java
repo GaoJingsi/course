@@ -1,6 +1,7 @@
-package com.slyk.course.service;
+package com.slyk.server.service.impl;
 
-import com.slyk.course.mapper.TestMapper;
+import com.slyk.server.mapper.TestMapper;
+import com.slyk.server.service.TestService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;

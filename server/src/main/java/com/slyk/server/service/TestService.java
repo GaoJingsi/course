@@ -1,4 +1,4 @@
-package com.slyk.course.service;
+package com.slyk.server.service;
 
 import java.util.List;
 import java.util.Map;
