@@ -254,8 +254,6 @@
 
 
 <script>
-    $('body').attr('class', 'login-layout')
-
     export default {
         name: "Login",
         methods: {
@@ -299,6 +297,8 @@
                 });
 
             });
+
+            $('body').attr('class', 'login-layout')
         },
     }
 </script>

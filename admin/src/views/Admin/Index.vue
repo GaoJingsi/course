@@ -976,15 +976,14 @@
 </template>
 
 <script>
-
-    $('body').attr('class', 'no-skin')
-
     export default {
         name: "Index",
         mounted(){
             try{ace.settings.loadState('main-container')}catch(e){}
             try{ace.settings.loadState('sidebar')}catch(e){}
             import('common/ace/assets/js/ace.min.js')
+
+            $('body').attr('class', 'no-skin')
         }
     }
 </script>
