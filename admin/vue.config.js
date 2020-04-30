@@ -19,5 +19,6 @@ module.exports = {
             .set('views', resolve('src/views'))
             .set('router', resolve('src/router'))
     },
-    publicPath: ''
+    // 这个开发时不能加。参考:https://www.cnblogs.com/xyyt/p/7718867.html
+    // publicPath: '.'
 }

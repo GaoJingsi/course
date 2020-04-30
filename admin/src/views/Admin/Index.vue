@@ -934,7 +934,7 @@
                         <div class="row">
                             <div class="col-xs-12">
                                 <!-- PAGE CONTENT BEGINS -->
-
+                                <router-view/>
                                 <!-- PAGE CONTENT ENDS -->
                             </div><!-- /.col -->
                         </div><!-- /.row -->
@@ -981,7 +981,7 @@
         mounted(){
             try{ace.settings.loadState('main-container')}catch(e){}
             try{ace.settings.loadState('sidebar')}catch(e){}
-            import('common/ace/assets/js/ace.min.js')
+            import('common/ace/assets/js/ace.min')
 
             $('body').attr('class', 'no-skin')
         }

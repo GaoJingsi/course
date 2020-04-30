@@ -17,7 +17,13 @@ export default new Router({
         },
         {
             path: '/admin',
-            component: () => import('views/Admin/Index')
+            component: () => import('views/Admin/Index'),
+            children:[
+                {
+                    path: 'welcome',
+                    component: () => import('views/Admin/Welcome/Index')
+                }
+            ]
         }
     ]
 })
