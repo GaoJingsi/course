@@ -13,6 +13,7 @@
         <module>gateway</module>
         <module>system</module>
         <module>server</module>
+        <module>business</module>
     </modules>
 
     <dependencyManagement>
