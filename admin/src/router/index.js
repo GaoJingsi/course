@@ -16,13 +16,23 @@ export default new Router({
             component: () => import('views/Login/Index')
         },
         {
-            path: '/admin',
+            path: '/',
             component: () => import('views/Admin/Index'),
-            children:[
+            children: [
                 {
                     path: 'welcome',
+                    meta: {
+                        sidebarId: 'welcome-sidebar'
+                    },
                     component: () => import('views/Admin/Welcome/Index')
-                }
+                },
+                {
+                    path: 'business/chapter',
+                    meta: {
+                        sidebarId: 'business-chapter-sidebar'
+                    },
+                    component: () => import('views/Admin/Chapter/Index')
+                },
             ]
         }
     ]

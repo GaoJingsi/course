@@ -2,7 +2,8 @@
     <div>
         <div id="navbar" class="navbar navbar-default          ace-save-state">
             <div class="navbar-container ace-save-state" id="navbar-container">
-                <button type="button" class="navbar-toggle menu-toggler pull-left" id="menu-toggler" data-target="#sidebar">
+                <button type="button" class="navbar-toggle menu-toggler pull-left" id="menu-toggler"
+                        data-target="#sidebar">
                     <span class="sr-only">Toggle sidebar</span>
 
                     <span class="icon-bar"></span>
@@ -13,12 +14,12 @@
                 </button>
 
                 <div class="navbar-header pull-left">
-                    <a href="index.html" class="navbar-brand">
+                    <router-link :to="{path:'/welcome'}" class="navbar-brand">
                         <small>
                             <i class="fa fa-leaf"></i>
-                            Ace Admin
+                            皇经楼社区工作人员在线学习平台
                         </small>
-                    </a>
+                    </router-link>
                 </div>
 
                 <div class="navbar-buttons navbar-header pull-right" role="navigation">
@@ -58,7 +59,8 @@
                                                 </div>
 
                                                 <div class="progress progress-mini">
-                                                    <div style="width:35%" class="progress-bar progress-bar-danger"></div>
+                                                    <div style="width:35%"
+                                                         class="progress-bar progress-bar-danger"></div>
                                                 </div>
                                             </a>
                                         </li>
@@ -71,7 +73,8 @@
                                                 </div>
 
                                                 <div class="progress progress-mini">
-                                                    <div style="width:15%" class="progress-bar progress-bar-warning"></div>
+                                                    <div style="width:15%"
+                                                         class="progress-bar progress-bar-warning"></div>
                                                 </div>
                                             </a>
                                         </li>
@@ -84,7 +87,8 @@
                                                 </div>
 
                                                 <div class="progress progress-mini progress-striped active">
-                                                    <div style="width:90%" class="progress-bar progress-bar-success"></div>
+                                                    <div style="width:90%"
+                                                         class="progress-bar progress-bar-success"></div>
                                                 </div>
                                             </a>
                                         </li>
@@ -184,7 +188,8 @@
                                     <ul class="dropdown-menu dropdown-navbar">
                                         <li>
                                             <a href="#" class="clearfix">
-                                                <img src="assets/images/avatars/avatar.png" class="msg-photo" alt="Alex's Avatar" />
+                                                <img src="assets/images/avatars/avatar.png" class="msg-photo"
+                                                     alt="Alex's Avatar"/>
                                                 <span class="msg-body">
 													<span class="msg-title">
 														<span class="blue">Alex:</span>
@@ -201,7 +206,8 @@
 
                                         <li>
                                             <a href="#" class="clearfix">
-                                                <img src="assets/images/avatars/avatar3.png" class="msg-photo" alt="Susan's Avatar" />
+                                                <img src="assets/images/avatars/avatar3.png" class="msg-photo"
+                                                     alt="Susan's Avatar"/>
                                                 <span class="msg-body">
 													<span class="msg-title">
 														<span class="blue">Susan:</span>
@@ -218,7 +224,8 @@
 
                                         <li>
                                             <a href="#" class="clearfix">
-                                                <img src="assets/images/avatars/avatar4.png" class="msg-photo" alt="Bob's Avatar" />
+                                                <img src="assets/images/avatars/avatar4.png" class="msg-photo"
+                                                     alt="Bob's Avatar"/>
                                                 <span class="msg-body">
 													<span class="msg-title">
 														<span class="blue">Bob:</span>
@@ -235,7 +242,8 @@
 
                                         <li>
                                             <a href="#" class="clearfix">
-                                                <img src="assets/images/avatars/avatar2.png" class="msg-photo" alt="Kate's Avatar" />
+                                                <img src="assets/images/avatars/avatar2.png" class="msg-photo"
+                                                     alt="Kate's Avatar"/>
                                                 <span class="msg-body">
 													<span class="msg-title">
 														<span class="blue">Kate:</span>
@@ -252,7 +260,8 @@
 
                                         <li>
                                             <a href="#" class="clearfix">
-                                                <img src="assets/images/avatars/avatar5.png" class="msg-photo" alt="Fred's Avatar" />
+                                                <img src="assets/images/avatars/avatar5.png" class="msg-photo"
+                                                     alt="Fred's Avatar"/>
                                                 <span class="msg-body">
 													<span class="msg-title">
 														<span class="blue">Fred:</span>
@@ -280,7 +289,7 @@
 
                         <li class="light-blue dropdown-modal">
                             <a data-toggle="dropdown" href="#" class="dropdown-toggle">
-                                <img class="nav-user-photo" src="assets/images/avatars/user.jpg" alt="Jason's Photo" />
+                                <img class="nav-user-photo" src="assets/images/avatars/user.jpg" alt="Jason's Photo"/>
                                 <span class="user-info">
 									<small>Welcome,</small>
 									Jason
@@ -354,13 +363,40 @@
                 </div><!-- /.sidebar-shortcuts -->
 
                 <ul class="nav nav-list">
-                    <li class="">
-                        <a href="index.html">
+                    <li class="" id="welcome-sidebar">
+                        <router-link :to="{path:'/welcome'}">
                             <i class="menu-icon fa fa-tachometer"></i>
-                            <span class="menu-text"> Dashboard </span>
+                            <span class="menu-text"> 欢迎页 </span>
+                        </router-link>
+
+                        <b class="arrow"></b>
+                    </li>
+
+                    <li class="active open" @click="expand($event)">
+                        <a href="javascript:void(0);" class="dropdown-toggle">
+                            <i class="menu-icon fa fa-desktop"></i>
+                            <span class="menu-text">
+								课程管理
+							</span>
+
+                            <b class="arrow fa fa-angle-down"></b>
                         </a>
 
                         <b class="arrow"></b>
+
+                        <ul class="submenu">
+                            <li class="active" id="business-chapter-sidebar">
+                                <router-link :to="{path:'/business/chapter'}" class="dropdown-toggle">
+                                    <i class="menu-icon fa fa-caret-right"></i>
+
+                                    大章管理
+                                    <b class="arrow fa fa-angle-down"></b>
+                                </router-link>
+
+                                <b class="arrow"></b>
+                            </li>
+
+                        </ul>
                     </li>
 
                     <li class="">
@@ -769,7 +805,7 @@
                         </ul>
                     </li>
 
-                    <li class="active open">
+                    <li class="">
                         <a href="#" class="dropdown-toggle">
                             <i class="menu-icon fa fa-file-o"></i>
 
@@ -834,7 +870,8 @@
                 </ul><!-- /.nav-list -->
 
                 <div class="sidebar-toggle sidebar-collapse" id="sidebar-collapse">
-                    <i id="sidebar-toggle-icon" class="ace-icon fa fa-angle-double-left ace-save-state" data-icon1="ace-icon fa fa-angle-double-left" data-icon2="ace-icon fa fa-angle-double-right"></i>
+                    <i id="sidebar-toggle-icon" class="ace-icon fa fa-angle-double-left ace-save-state"
+                       data-icon1="ace-icon fa fa-angle-double-left" data-icon2="ace-icon fa fa-angle-double-right"></i>
                 </div>
             </div>
 
@@ -856,7 +893,8 @@
                         <div class="nav-search" id="nav-search">
                             <form class="form-search">
 								<span class="input-icon">
-									<input type="text" placeholder="Search ..." class="nav-search-input" id="nav-search-input" autocomplete="off" />
+									<input type="text" placeholder="Search ..." class="nav-search-input"
+                                           id="nav-search-input" autocomplete="off"/>
 									<i class="ace-icon fa fa-search nav-search-icon"></i>
 								</span>
                             </form>
@@ -884,27 +922,32 @@
                                     </div>
 
                                     <div class="ace-settings-item">
-                                        <input type="checkbox" class="ace ace-checkbox-2 ace-save-state" id="ace-settings-navbar" autocomplete="off" />
+                                        <input type="checkbox" class="ace ace-checkbox-2 ace-save-state"
+                                               id="ace-settings-navbar" autocomplete="off"/>
                                         <label class="lbl" for="ace-settings-navbar"> Fixed Navbar</label>
                                     </div>
 
                                     <div class="ace-settings-item">
-                                        <input type="checkbox" class="ace ace-checkbox-2 ace-save-state" id="ace-settings-sidebar" autocomplete="off" />
+                                        <input type="checkbox" class="ace ace-checkbox-2 ace-save-state"
+                                               id="ace-settings-sidebar" autocomplete="off"/>
                                         <label class="lbl" for="ace-settings-sidebar"> Fixed Sidebar</label>
                                     </div>
 
                                     <div class="ace-settings-item">
-                                        <input type="checkbox" class="ace ace-checkbox-2 ace-save-state" id="ace-settings-breadcrumbs" autocomplete="off" />
+                                        <input type="checkbox" class="ace ace-checkbox-2 ace-save-state"
+                                               id="ace-settings-breadcrumbs" autocomplete="off"/>
                                         <label class="lbl" for="ace-settings-breadcrumbs"> Fixed Breadcrumbs</label>
                                     </div>
 
                                     <div class="ace-settings-item">
-                                        <input type="checkbox" class="ace ace-checkbox-2" id="ace-settings-rtl" autocomplete="off" />
+                                        <input type="checkbox" class="ace ace-checkbox-2" id="ace-settings-rtl"
+                                               autocomplete="off"/>
                                         <label class="lbl" for="ace-settings-rtl"> Right To Left (rtl)</label>
                                     </div>
 
                                     <div class="ace-settings-item">
-                                        <input type="checkbox" class="ace ace-checkbox-2 ace-save-state" id="ace-settings-add-container" autocomplete="off" />
+                                        <input type="checkbox" class="ace ace-checkbox-2 ace-save-state"
+                                               id="ace-settings-add-container" autocomplete="off"/>
                                         <label class="lbl" for="ace-settings-add-container">
                                             Inside
                                             <b>.container</b>
@@ -914,17 +957,20 @@
 
                                 <div class="pull-left width-50">
                                     <div class="ace-settings-item">
-                                        <input type="checkbox" class="ace ace-checkbox-2" id="ace-settings-hover" autocomplete="off" />
+                                        <input type="checkbox" class="ace ace-checkbox-2" id="ace-settings-hover"
+                                               autocomplete="off"/>
                                         <label class="lbl" for="ace-settings-hover"> Submenu on Hover</label>
                                     </div>
 
                                     <div class="ace-settings-item">
-                                        <input type="checkbox" class="ace ace-checkbox-2" id="ace-settings-compact" autocomplete="off" />
+                                        <input type="checkbox" class="ace ace-checkbox-2" id="ace-settings-compact"
+                                               autocomplete="off"/>
                                         <label class="lbl" for="ace-settings-compact"> Compact Sidebar</label>
                                     </div>
 
                                     <div class="ace-settings-item">
-                                        <input type="checkbox" class="ace ace-checkbox-2" id="ace-settings-highlight" autocomplete="off" />
+                                        <input type="checkbox" class="ace ace-checkbox-2" id="ace-settings-highlight"
+                                               autocomplete="off"/>
                                         <label class="lbl" for="ace-settings-highlight"> Alt. Active Item</label>
                                     </div>
                                 </div><!-- /.pull-left -->
@@ -947,7 +993,7 @@
                     <div class="footer-content">
 						<span class="bigger-120">
 							<span class="blue bolder">Ace</span>
-							Application &copy; 2013-2014
+							Application &copy; 2019-2020
 						</span>
 
                         &nbsp; &nbsp;
@@ -978,16 +1024,48 @@
 <script>
     export default {
         name: "Index",
-        mounted(){
-            try{ace.settings.loadState('main-container')}catch(e){}
-            try{ace.settings.loadState('sidebar')}catch(e){}
+        methods: {
+            setSideBarActive(sidebarId) {
+                if (sidebarId) {
+                    $('.nav-list li').removeClass('active').removeClass('open')
+                    $('#' + sidebarId)
+                        .addClass('active')
+                        .parent('ul').parent('li').addClass('active').addClass('open')
+                }
+            },
+            expand(event) {
+                $(event.currentTarget).addClass('open')
+            }
+        },
+        watch: {
+            $route(val, oldVal) {
+                let _this = this;
+                _this.$nextTick(() => {
+                    _this.setSideBarActive(val.meta.sidebarId)
+                })
+            }
+        },
+        mounted() {
+            let _this = this;
+            try {
+                ace.settings.loadState('main-container')
+            } catch (e) {
+            }
+            try {
+                ace.settings.loadState('sidebar')
+            } catch (e) {
+            }
             import('common/ace/assets/js/ace.min')
 
             $('body').attr('class', 'no-skin')
+
+            _this.setSideBarActive(_this.$route.meta.sidebarId)
         }
     }
 </script>
 
-<style scoped>
-
+<style lang="stylus" scoped>
+    .no-skin
+        .nav-list > li > a > span
+            vertical-align: sub;
 </style>
