@@ -1,4 +1,4 @@
-package com.slyk.course.server.response;
+package com.slyk.course.server.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -9,9 +9,12 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class ResponseBo<T> {
+public class ChapterDto {
 
-    private Integer error_no;
-    private T data;
-    private String msg;
+    private String id;
+
+    private String courseId;
+
+    private String name;
+
 }
