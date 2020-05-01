@@ -2816,6 +2816,7 @@
                 let _this = this;
                 getChapterList().then(data => {
                     _this.chapterList = data.data
+                    console.log(data)
                 })
             }
         },
