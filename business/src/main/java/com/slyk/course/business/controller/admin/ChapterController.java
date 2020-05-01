@@ -1,6 +1,7 @@
-package com.slyk.course.business.controller;
+package com.slyk.course.business.controller.admin;
 
 import com.slyk.course.server.domain.Chapter;
+import com.slyk.course.server.response.ResponseBo;
 import com.slyk.course.server.service.ChapterService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,9 +15,14 @@ public class ChapterController {
     @Autowired
     private ChapterService chapterService;
 
-    @GetMapping("/chapter")
-    public List<Chapter> chapter() {
-        return chapterService.getChapterList();
+    @GetMapping("/admin/chapter")
+    public ResponseBo<List<Chapter>> chapter() {
+        return ResponseBo
+                .<List<Chapter>>builder()
+                .error_no(0)
+                .data(chapterService.getChapterList())
+                .msg("获取大章内容成功！")
+                .build();
     }
 
 }
