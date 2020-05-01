@@ -363,7 +363,7 @@
                 </div><!-- /.sidebar-shortcuts -->
 
                 <ul class="nav nav-list">
-                    <li class="" id="welcome-sidebar">
+                    <li class="" id="welcome-sidebar" @click="expand($event)">
                         <router-link :to="{path:'/welcome'}">
                             <i class="menu-icon fa fa-tachometer"></i>
                             <span class="menu-text"> 欢迎页 </span>
