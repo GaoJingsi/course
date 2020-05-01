@@ -21,7 +21,7 @@ public class SystemApplication {
         log.info(
                 "{} 模块： http://{}:{} 启动成功！",
                 environment.getProperty("spring.application.name"),
-                environment.getProperty("server.address"),
+                environment.getProperty("server-address"),
                 environment.getProperty("server.port")
         );
     }
