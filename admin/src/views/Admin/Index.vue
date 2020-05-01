@@ -372,7 +372,7 @@
                         <b class="arrow"></b>
                     </li>
 
-                    <li class="active open" @click="expand($event)">
+                    <li class="" @click="expand($event)">
                         <a href="javascript:void(0);" class="dropdown-toggle">
                             <i class="menu-icon fa fa-desktop"></i>
                             <span class="menu-text">
@@ -385,7 +385,7 @@
                         <b class="arrow"></b>
 
                         <ul class="submenu">
-                            <li class="active" id="business-chapter-sidebar">
+                            <li class="" id="business-chapter-sidebar">
                                 <router-link :to="{path:'/business/chapter'}" class="dropdown-toggle">
                                     <i class="menu-icon fa fa-caret-right"></i>
 
