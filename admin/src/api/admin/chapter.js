@@ -18,3 +18,16 @@ export function getChapterList(page = 1, size = 5) {
             return Promise.reject(resp)
         })
 }
+
+export function saveOneChapter(chapter) {
+    return axios.post(BASE_URL + 'business/admin/chapter/save', chapter)
+        .then(data => {
+            if (data.data.error_no === 0) {
+                return Promise.resolve(true)
+            }
+
+            return Promise.reject(data)
+        }).catch(resp => {
+            return Promise.reject(resp)
+        })
+}

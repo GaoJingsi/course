@@ -7,4 +7,5 @@ public interface ChapterService {
 
     void getChapterList(PageDto<ChapterDto> pageDto);
 
+    void saveOneChapter(ChapterDto chapterDto);
 }

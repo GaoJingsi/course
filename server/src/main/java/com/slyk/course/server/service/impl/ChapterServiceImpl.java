@@ -7,10 +7,13 @@ import com.slyk.course.server.dto.ChapterDto;
 import com.slyk.course.server.dto.PageDto;
 import com.slyk.course.server.mapper.ChapterMapper;
 import com.slyk.course.server.service.ChapterService;
+import com.slyk.course.server.utils.CopyUtil;
+import com.slyk.course.server.utils.UuidUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
 import javax.annotation.Resource;
 import java.util.ArrayList;
@@ -38,5 +41,18 @@ public class ChapterServiceImpl implements ChapterService {
             chapterDtos.add(chapterDto);
         }
         pageDto.setRows(chapterDtos);
+    }
+
+    @Override
+    public void saveOneChapter(ChapterDto chapterDto) {
+        Chapter chapter = CopyUtil.copy(chapterDto, Chapter.class);
+        if (StringUtils.isEmpty(chapter.getId())) {
+            String shortUuid = UuidUtil.getShortUuid();
+            chapterDto.setId(shortUuid);
+            chapter.setId(shortUuid);
+            chapterMapper.insertSelective(chapter);
+        } else {
+            chapterMapper.updateByPrimaryKey(chapter);
+        }
     }
 }

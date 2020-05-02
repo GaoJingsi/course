@@ -1,8 +1,44 @@
 <template>
     <div>
+        <!-- Modal -->
+        <div class="modal fade" id="saveModal" tabindex="-1" role="dialog" aria-labelledby="saveModalLabel">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="saveModalLabel">编辑大章</h4>
+                    </div>
+                    <div class="modal-body">
+                        <form>
+                            <div class="form-group">
+                                <label for="name">大章名称</label>
+                                <input type="text" v-model="chapterToEdit.name" class="form-control" id="name"
+                                       placeholder="大章名称">
+                            </div>
+                            <div class="form-group">
+                                <label for="courseId">课程ID</label>
+                                <input type="text" v-model="chapterToEdit.courseId" class="form-control" id="courseId"
+                                       placeholder="课程ID">
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                        <button type="button" class="btn btn-primary" @click="saveOneChapter">保存</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <div class="row">
             <div class="col-xs-12">
                 <P>
+                    <button class="btn btn-white btn-default btn-round" @click="showEditChapterDialog">
+                        <i class="ace-icon fa fa-save red2"></i>
+                        新增
+                    </button>
+                    &nbsp;
                     <button class="btn btn-white btn-default btn-round"
                             @click="getChapterList(1,$refs.pagination.size)">
                         <i class="ace-icon fa fa-refresh red2"></i>
@@ -1903,6 +1939,7 @@
 <script>
     import {getChapterList} from "api/admin/chapter";
     import Pagination from "components/Pagination/Pagination";
+    import {saveOneChapter} from "../../../api/admin/chapter";
 
     export default {
         name: "Index",
@@ -1910,6 +1947,11 @@
         data() {
             return {
                 tableData: [],
+                chapterToEdit: {
+                    id: '',
+                    name: '',
+                    courseId: ''
+                },
                 currentPageConfig: {
                     tableSize: 1
                 }
@@ -1928,6 +1970,18 @@
                 let _this = this;
                 _this.currentPageConfig.tableSize = currentPageSize;
                 _this.getChapterList(1, this.currentPageConfig.tableSize)
+            },
+            showEditChapterDialog() {
+                $('#saveModal').modal('show')
+            },
+            saveOneChapter() {
+                let _this = this;
+                saveOneChapter(_this.chapterToEdit).then(success => {
+                    if (success) {
+                        _this.getChapterList(1, _this.currentPageConfig.tableSize)
+                        $('#saveModal').modal('hide')
+                    }
+                })
             }
         },
         created() {
