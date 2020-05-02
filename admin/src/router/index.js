@@ -24,14 +24,14 @@ export default new Router({
                     meta: {
                         sidebarId: 'welcome-sidebar'
                     },
-                    component: () => import('views/Admin/Welcome/Index')
+                    component: () => import('views/Admin/Welcome/Welcome')
                 },
                 {
                     path: 'business/chapter',
                     meta: {
                         sidebarId: 'business-chapter-sidebar'
                     },
-                    component: () => import('views/Admin/Chapter/Index')
+                    component: () => import('views/Admin/Chapter/Chapter')
                 },
             ]
         }
