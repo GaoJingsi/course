@@ -1920,6 +1920,7 @@
                 let _this = this;
                 getChapterList(page, size).then(data => {
                     _this.tableData = data.data
+                    //由于数据的更新，等dom更新以后，$nextTick里的操作会被执行
                     _this.$nextTick(() => _this.$refs.pagination.render(page))
                 })
             },
