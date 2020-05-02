@@ -258,7 +258,7 @@
         name: "Login",
         methods: {
             login() {
-                this.$router.push({path: '/admin'})
+                this.$router.push({path: '/'})
             }
         },
         mounted() {

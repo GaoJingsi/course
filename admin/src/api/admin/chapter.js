@@ -19,8 +19,21 @@ export function getChapterList(page = 1, size = 5) {
         })
 }
 
-export function saveOneChapter(chapter) {
+export function addOneChapter(chapter) {
     return axios.post(BASE_URL + 'business/admin/chapter/save', chapter)
+        .then(data => {
+            if (data.data.error_no === 0) {
+                return Promise.resolve(true)
+            }
+
+            return Promise.reject(data)
+        }).catch(resp => {
+            return Promise.reject(resp)
+        })
+}
+
+export function editOneChapter(chapter) {
+    return axios.put(BASE_URL + 'business/admin/chapter/save', chapter)
         .then(data => {
             if (data.data.error_no === 0) {
                 return Promise.resolve(true)

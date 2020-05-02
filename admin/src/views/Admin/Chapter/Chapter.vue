@@ -34,7 +34,7 @@
         <div class="row">
             <div class="col-xs-12">
                 <P>
-                    <button class="btn btn-white btn-default btn-round" @click="showEditChapterDialog">
+                    <button class="btn btn-white btn-default btn-round" @click="showEditChapterDialog(null)">
                         <i class="ace-icon fa fa-save red2"></i>
                         新增
                     </button>
@@ -79,7 +79,7 @@
                                     <i class="ace-icon fa fa-check bigger-120"></i>
                                 </button>
 
-                                <button class="btn btn-xs btn-info">
+                                <button class="btn btn-xs btn-info" @click="showEditChapterDialog(chapter)">
                                     <i class="ace-icon fa fa-pencil bigger-120"></i>
                                 </button>
 
@@ -1937,9 +1937,8 @@
 </template>
 
 <script>
-    import {getChapterList} from "api/admin/chapter";
+    import {getChapterList, addOneChapter, editOneChapter} from "api/admin/chapter";
     import Pagination from "components/Pagination/Pagination";
-    import {saveOneChapter} from "../../../api/admin/chapter";
 
     export default {
         name: "Index",
@@ -1971,12 +1970,33 @@
                 _this.currentPageConfig.tableSize = currentPageSize;
                 _this.getChapterList(1, this.currentPageConfig.tableSize)
             },
-            showEditChapterDialog() {
+            //如果传入了chapter，说明是编辑，否则是新增
+            showEditChapterDialog(chapter) {
+                let _this = this
+                if (chapter) {
+                    _this.chapterToEdit = Object.assign({}, chapter)
+                } else {
+
+                    _this.chapterToEdit = {
+                        id: '',
+                        name: '',
+                        courseId: ''
+                    }
+                }
                 $('#saveModal').modal('show')
             },
             saveOneChapter() {
                 let _this = this;
-                saveOneChapter(_this.chapterToEdit).then(success => {
+                addOneChapter(_this.chapterToEdit).then(success => {
+                    if (success) {
+                        _this.getChapterList(1, _this.currentPageConfig.tableSize)
+                        $('#saveModal').modal('hide')
+                    }
+                })
+            },
+            editOneChapter() {
+                let _this = this;
+                editOneChapter(_this.chapterToEdit).then(success => {
                     if (success) {
                         _this.getChapterList(1, _this.currentPageConfig.tableSize)
                         $('#saveModal').modal('hide')

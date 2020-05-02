@@ -35,7 +35,7 @@ public class ChapterController {
         }
     }
 
-    @PostMapping("/save")
+    @RequestMapping(value = "/save", method = {RequestMethod.POST, RequestMethod.PUT})
     public ResponseBo<ChapterDto> saveOneChapter(@RequestBody ChapterDto chapterDto) {
         try {
             chapterService.saveOneChapter(chapterDto);
