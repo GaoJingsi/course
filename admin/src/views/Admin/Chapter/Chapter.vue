@@ -1,5 +1,7 @@
 <template>
     <div>
+        <loading v-if="currentPageConfig.showLoading"/>
+
         <!-- Modal -->
         <div class="modal fade" id="saveModal" tabindex="-1" role="dialog" aria-labelledby="saveModalLabel">
             <div class="modal-dialog" role="document">
@@ -1942,10 +1944,11 @@
     import {getChapterList, addOneChapter, editOneChapter, delOneChapter} from "api/admin/chapter";
     import Pagination from "components/Pagination/Pagination";
     import {MessageBox, Swal} from "common/utils/SweetAlert2";
+    import Loading from "../../../components/Loading/Loading";
 
     export default {
         name: "Index",
-        components: {Pagination},
+        components: {Loading, Pagination},
         data() {
             return {
                 tableData: [],
@@ -1955,7 +1958,8 @@
                     courseId: ''
                 },
                 currentPageConfig: {
-                    tableSize: 1
+                    tableSize: 1,
+                    showLoading: true
                 }
             }
         },
@@ -2013,8 +2017,12 @@
                     message: '您确认要删除大章吗？',
                     callback: function (result) {
                         if (result.value) {
+                            _this.currentPageConfig.showLoading = true
                             delOneChapter(id).then(success => {
                                 _this.getChapterList(1, _this.currentPageConfig.tableSize)
+                                setTimeout(function () {
+                                    _this.currentPageConfig.showLoading = false
+                                },1000)
                             })
                             new MessageBox({
                                 message: '删除成功！',
@@ -2023,6 +2031,9 @@
                             // For more information about handling dismissals please visit
                             // https://sweetalert2.github.io/#handling-dismissals
                         } else if (result.dismiss === Swal.DismissReason.cancel) {
+                            setTimeout(function () {
+                                _this.currentPageConfig.showLoading = false
+                            },1000)
                             new MessageBox({
                                 message: '删除已取消！您的数据很安全。',
                                 icon: 'info'
@@ -2034,6 +2045,9 @@
         },
         created() {
             this.getChapterList(1, this.currentPageConfig.tableSize)
+        },
+        mounted() {
+            this.currentPageConfig.showLoading = false
         }
     }
 </script>
