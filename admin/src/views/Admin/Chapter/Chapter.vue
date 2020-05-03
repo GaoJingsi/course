@@ -83,7 +83,7 @@
                                     <i class="ace-icon fa fa-pencil bigger-120"></i>
                                 </button>
 
-                                <button class="btn btn-xs btn-danger">
+                                <button class="btn btn-xs btn-danger" @click="delOneChapter(chapter.id)">
                                     <i class="ace-icon fa fa-trash-o bigger-120"></i>
                                 </button>
 
@@ -109,7 +109,8 @@
                                         </li>
 
                                         <li>
-                                            <a href="#" class="tooltip-success" data-rel="tooltip" title="Edit">
+                                            <a href="javascript:void(0);" class="tooltip-success" data-rel="tooltip"
+                                               title="Edit" @click="showEditChapterDialog(chapter)">
 																			<span class="green">
 																				<i class="ace-icon fa fa-pencil-square-o bigger-120"></i>
 																			</span>
@@ -117,7 +118,8 @@
                                         </li>
 
                                         <li>
-                                            <a href="#" class="tooltip-error" data-rel="tooltip" title="Delete">
+                                            <a href="#" class="tooltip-error" data-rel="tooltip" title="Delete"
+                                               @click="delOneChapter(chapter.id)">
 																			<span class="red">
 																				<i class="ace-icon fa fa-trash-o bigger-120"></i>
 																			</span>
@@ -1937,8 +1939,9 @@
 </template>
 
 <script>
-    import {getChapterList, addOneChapter, editOneChapter} from "api/admin/chapter";
+    import {getChapterList, addOneChapter, editOneChapter, delOneChapter} from "api/admin/chapter";
     import Pagination from "components/Pagination/Pagination";
+    import {MessageBox, Swal} from "common/utils/SweetAlert2";
 
     export default {
         name: "Index",
@@ -1974,6 +1977,7 @@
             showEditChapterDialog(chapter) {
                 let _this = this
                 if (chapter) {
+                    //因为直接用chapter会触发界面的修改，所以复制一份对象，用复制的对象去修改
                     _this.chapterToEdit = Object.assign({}, chapter)
                 } else {
 
@@ -2002,6 +2006,30 @@
                         $('#saveModal').modal('hide')
                     }
                 })
+            },
+            delOneChapter(id) {
+                let _this = this;
+                new MessageBox({
+                    message: '您确认要删除大章吗？',
+                    callback: function (result) {
+                        if (result.value) {
+                            delOneChapter(id).then(success => {
+                                _this.getChapterList(1, _this.currentPageConfig.tableSize)
+                            })
+                            new MessageBox({
+                                message: '删除成功！',
+                                icon: 'success'
+                            }).toast()
+                            // For more information about handling dismissals please visit
+                            // https://sweetalert2.github.io/#handling-dismissals
+                        } else if (result.dismiss === Swal.DismissReason.cancel) {
+                            new MessageBox({
+                                message: '删除已取消！您的数据很安全。',
+                                icon: 'info'
+                            }).alert()
+                        }
+                    }
+                }).comfirm()
             }
         },
         created() {

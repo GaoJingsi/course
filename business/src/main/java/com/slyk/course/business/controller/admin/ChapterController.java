@@ -8,13 +8,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/admin/chapter")
+@RequestMapping("/admin/chapters")
 public class ChapterController {
 
     @Autowired
     private ChapterService chapterService;
 
-    @GetMapping("/list")
+    @GetMapping("")
     public ResponseBo<PageDto<ChapterDto>> getChapterList(PageDto<ChapterDto> pageDto) {
         try {
             chapterService.getChapterList(pageDto);
@@ -35,7 +35,7 @@ public class ChapterController {
         }
     }
 
-    @RequestMapping(value = "/save", method = {RequestMethod.POST, RequestMethod.PUT})
+    @RequestMapping(value = "", method = {RequestMethod.POST, RequestMethod.PUT})
     public ResponseBo<ChapterDto> saveOneChapter(@RequestBody ChapterDto chapterDto) {
         try {
             chapterService.saveOneChapter(chapterDto);
@@ -52,6 +52,27 @@ public class ChapterController {
                     .error_no(0)
                     .data(chapterDto)
                     .msg("保存失败！")
+                    .build();
+        }
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseBo<Boolean> deleteOneChapter(@PathVariable("id") String id){
+        try {
+            chapterService.deleteOneChapter(id);
+            return ResponseBo
+                    .<Boolean>builder()
+                    .error_no(0)
+                    .data(true)
+                    .msg("删除成功！")
+                    .build();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseBo
+                    .<Boolean>builder()
+                    .error_no(0)
+                    .data(true)
+                    .msg(e.getMessage())
                     .build();
         }
     }

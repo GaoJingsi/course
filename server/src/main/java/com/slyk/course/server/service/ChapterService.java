@@ -8,4 +8,6 @@ public interface ChapterService {
     void getChapterList(PageDto<ChapterDto> pageDto);
 
     void saveOneChapter(ChapterDto chapterDto);
+
+    void deleteOneChapter(String id) throws Exception;
 }

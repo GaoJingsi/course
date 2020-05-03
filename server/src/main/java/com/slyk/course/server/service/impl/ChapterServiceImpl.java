@@ -55,4 +55,14 @@ public class ChapterServiceImpl implements ChapterService {
             chapterMapper.updateByPrimaryKey(chapter);
         }
     }
+
+    @Override
+    public void deleteOneChapter(String id) throws Exception {
+        int i = chapterMapper.deleteByPrimaryKey(id);
+        if (i > 1) {
+            throw new Exception("删除了2条或以上的记录！");
+        } else if (i < 1) {
+            throw new Exception("删除了0条的记录！");
+        }
+    }
 }
