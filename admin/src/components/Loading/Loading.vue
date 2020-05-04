@@ -1,7 +1,9 @@
 <template>
-    <div class="loading">
-        <img :src="imageSrc" alt="加载中" class="img">
-    </div>
+    <transition name="fade" v-if="show">
+        <div class="loading">
+            <img :src="imageSrc" alt="加载中" class="img">
+        </div>
+    </transition>
 </template>
 
 <script>
@@ -14,11 +16,28 @@
                     return require('./images/loading.gif');
                 }
             }
+        },
+        data() {
+            return {
+                show: true
+            }
         }
     }
 </script>
 
 <style scoped>
+    .fade-enter, .fade-leave-to {
+        opacity: 0
+    }
+
+    .fade-enter-active, .fade-leave-active {
+        transition: opacity 0.3s
+    }
+
+    .fade-enter-to, .fade-leave {
+        opacity: 1
+    }
+
     .loading {
         position: fixed;
         z-index: 2000;

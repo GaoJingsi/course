@@ -1,9 +1,5 @@
 <template>
     <div>
-        <transition v-if="currentPageConfig.showLoading" name="fade">
-            <loading/>
-        </transition>
-
         <!-- Modal -->
         <div class="modal fade" id="saveModal" tabindex="-1" role="dialog" aria-labelledby="saveModalLabel">
             <div class="modal-dialog" role="document">
@@ -1946,11 +1942,11 @@
     import {getChapterList, addOneChapter, editOneChapter, delOneChapter} from "api/admin/chapter";
     import Pagination from "components/Pagination/Pagination";
     import {MessageBox, Swal} from "common/utils/SweetAlert2";
-    import Loading from "../../../components/Loading/Loading";
+    import MaskLoading from "common/utils/LoadingMask";
 
     export default {
         name: "Index",
-        components: {Loading, Pagination},
+        components: {Pagination},
         data() {
             return {
                 tableData: [],
@@ -1961,7 +1957,7 @@
                 },
                 currentPageConfig: {
                     tableSize: 1,
-                    showLoading: true
+                    showLoading: false
                 }
             }
         },
@@ -2018,28 +2014,29 @@
                 new MessageBox({
                     message: '您确认要删除大章吗？',
                     callback: function (result) {
-                        _this.currentPageConfig.showLoading = true
+                        MaskLoading.start()
                         if (result.value) {
                             delOneChapter(id).then(success => {
                                 _this.getChapterList(1, _this.currentPageConfig.tableSize)
+
                                 setTimeout(function () {
-                                    _this.currentPageConfig.showLoading = false
+                                    MaskLoading.complete()
                                     new MessageBox({
                                         message: '删除成功！',
                                         icon: 'success'
                                     }).toast()
-                                },1000)
+                                }, 1000)
                             })
                             // For more information about handling dismissals please visit
                             // https://sweetalert2.github.io/#handling-dismissals
                         } else if (result.dismiss === Swal.DismissReason.cancel) {
                             setTimeout(function () {
-                                _this.currentPageConfig.showLoading = false
+                                MaskLoading.complete()
                                 new MessageBox({
                                     message: '删除已取消！您的数据很安全。',
                                     icon: 'info'
                                 }).alert()
-                            },1000)
+                            }, 1000)
                         }
                     }
                 }).comfirm()
@@ -2049,16 +2046,17 @@
             this.getChapterList(1, this.currentPageConfig.tableSize)
         },
         mounted() {
-            this.currentPageConfig.showLoading = false
-        }
+        },
     }
 </script>
 
 <style lang="stylus" scoped>
     .fade-enter, .fade-leave-to
         opacity 0
+
     .fade-enter-active, .fade-leave-active
         transition opacity 0.3s
+
     .fade-enter-to, .fade-leave
         opacity 1
 </style>
