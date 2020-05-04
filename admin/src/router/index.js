@@ -34,6 +34,13 @@ const router = new Router({
                     },
                     component: () => import('views/Admin/Chapter/Chapter')
                 },
+                {
+                    path: 'business/section',
+                    meta: {
+                        sidebarId: 'business-section-sidebar'
+                    },
+                    component: () => import('views/Admin/Section/Section')
+                },
             ]
         }
     ]

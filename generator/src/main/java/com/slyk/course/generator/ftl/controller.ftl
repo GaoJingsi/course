@@ -1,15 +1,14 @@
-package com.course.${module}.controller.admin;
+package com.slyk.course.${module}.controller.admin;
 
-import com.course.server.dto.${Domain}Dto;
-import com.course.server.dto.PageDto;
-import com.course.server.dto.ResponseDto;
-import com.course.server.service.${Domain}Service;
-import com.course.server.util.ValidatorUtil;
+import com.slyk.course.server.bo.ResponseBo;
+import com.slyk.course.server.dto.${Domain}Dto;
+import com.slyk.course.server.dto.PageDto;
+import com.slyk.course.server.service.${Domain}Service;
+import com.slyk.course.server.utils.ValidatorUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
-import javax.annotation.Resource;
 
 @RestController
 @RequestMapping("/admin/${domain}")
@@ -18,50 +17,83 @@ public class ${Domain}Controller {
     private static final Logger LOG = LoggerFactory.getLogger(${Domain}Controller.class);
     public static final String BUSINESS_NAME = "${tableNameCn}";
 
-    @Resource
+    @Autowired
     private ${Domain}Service ${domain}Service;
 
-    /**
-     * 列表查询
-     */
-    @PostMapping("/list")
-    public ResponseDto list(@RequestBody PageDto pageDto) {
-        ResponseDto responseDto = new ResponseDto();
-        ${domain}Service.list(pageDto);
-        responseDto.setContent(pageDto);
-        return responseDto;
+    @GetMapping("")
+    public ResponseBo<PageDto<${Domain}Dto>> get${Domain}List(PageDto<${Domain}Dto> pageDto) {
+        try {
+            ${domain}Service.get${Domain}List(pageDto);
+            return ResponseBo
+                    .<PageDto<${Domain}Dto>>builder()
+                    .error_no(0)
+                    .data(pageDto)
+                    .msg("获取${tableNameCn}内容成功！")
+                    .build();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            return ResponseBo
+                    .<PageDto<${Domain}Dto>>builder()
+                    .error_no(50000)
+                    .data(pageDto)
+                    .msg("获取${tableNameCn}内容失败，出现异常！")
+                    .build();
+        }
     }
 
-    /**
-     * 保存，id有值时更新，无值时新增
-     */
-    @PostMapping("/save")
-    public ResponseDto save(@RequestBody ${Domain}Dto ${domain}Dto) {
+    @RequestMapping(value = "", method = {RequestMethod.POST, RequestMethod.PUT})
+    public ResponseBo<${Domain}Dto> saveOne${Domain}(@RequestBody ${Domain}Dto ${domain}Dto) {
+
         // 保存校验
         <#list fieldList as field>
-        <#if field.name!="id" && field.nameHump!="createdAt" && field.nameHump!="updatedAt" && field.nameHump!="sort">
-            <#if !field.nullAble>
+            <#if field.name!="id" && field.nameHump!="createdAt" && field.nameHump!="updatedAt" && field.nameHump!="sort">
+                <#if !field.nullAble>
         ValidatorUtil.require(${domain}Dto.get${field.nameBigHump}(), "${field.nameCn}");
-            </#if>
-            <#if (field.length > 0)>
+                </#if>
+                <#if (field.length > 0)>
         ValidatorUtil.length(${domain}Dto.get${field.nameBigHump}(), "${field.nameCn}", 1, ${field.length?c});
+                </#if>
             </#if>
-        </#if>
         </#list>
 
-        ResponseDto responseDto = new ResponseDto();
-        ${domain}Service.save(${domain}Dto);
-        responseDto.setContent(${domain}Dto);
-        return responseDto;
+        try {
+            ${domain}Service.saveOne${Domain}(${domain}Dto);
+            return ResponseBo
+                    .<${Domain}Dto>builder()
+                    .error_no(0)
+                    .data(${domain}Dto)
+                    .msg("保存成功！")
+                    .build();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseBo
+                    .<${Domain}Dto>builder()
+                    .error_no(0)
+                    .data(${domain}Dto)
+                    .msg("保存失败！")
+                    .build();
+        }
     }
 
-    /**
-     * 删除
-     */
-    @DeleteMapping("/delete/{id}")
-    public ResponseDto delete(@PathVariable String id) {
-        ResponseDto responseDto = new ResponseDto();
-        ${domain}Service.delete(id);
-        return responseDto;
+    @DeleteMapping("/{id}")
+    public ResponseBo<Boolean> deleteOne${Domain}(@PathVariable("id") String id){
+        try {
+            ${domain}Service.deleteOne${Domain}(id);
+            return ResponseBo
+                    .<Boolean>builder()
+                    .error_no(0)
+                    .data(true)
+                    .msg("删除成功！")
+                    .build();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseBo
+                    .<Boolean>builder()
+                    .error_no(0)
+                    .data(true)
+                    .msg(e.getMessage())
+                    .build();
+        }
     }
+
 }

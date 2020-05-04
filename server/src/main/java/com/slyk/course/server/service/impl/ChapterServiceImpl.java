@@ -44,7 +44,7 @@ public class ChapterServiceImpl implements ChapterService {
             String shortUuid = UuidUtil.getShortUuid();
             chapterDto.setId(shortUuid);
             chapter.setId(shortUuid);
-            chapterMapper.insertSelective(chapter);
+            chapterMapper.insert(chapter);
         } else {
             chapterMapper.updateByPrimaryKey(chapter);
         }

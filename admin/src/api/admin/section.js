@@ -1,8 +1,8 @@
 import axios from 'axios'
 import {BASE_URL} from "common/config/apiConfig";
 
-export function getChapterList(page = 1, size = 5) {
-    return axios.get(BASE_URL + 'business/admin/chapter', {
+export function getSectionList(page = 1, size = 5) {
+    return axios.get(BASE_URL + 'business/admin/section', {
         params: {
             page,
             size
@@ -19,8 +19,8 @@ export function getChapterList(page = 1, size = 5) {
         })
 }
 
-export function addOneChapter(chapter) {
-    return axios.post(BASE_URL + 'business/admin/chapter', chapter)
+export function addOneSection(section) {
+    return axios.post(BASE_URL + 'business/admin/section', section)
         .then(data => {
             if (data.data.error_no === 0) {
                 return Promise.resolve(true)
@@ -32,8 +32,8 @@ export function addOneChapter(chapter) {
         })
 }
 
-export function editOneChapter(chapter) {
-    return axios.put(BASE_URL + 'business/admin/chapter', chapter)
+export function editOneSection(section) {
+    return axios.put(BASE_URL + 'business/admin/section', section)
         .then(data => {
             if (data.data.error_no === 0) {
                 return Promise.resolve(true)
@@ -45,8 +45,8 @@ export function editOneChapter(chapter) {
         })
 }
 
-export function delOneChapter(id) {
-    return axios.delete(BASE_URL + 'business/admin/chapter/' + id)
+export function delOneSection(id) {
+    return axios.delete(BASE_URL + 'business/admin/section/' + id)
         .then(data => {
             if (data.data.error_no === 0) {
                 return Promise.resolve(true)

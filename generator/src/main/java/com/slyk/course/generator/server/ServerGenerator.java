@@ -14,6 +14,7 @@ public class ServerGenerator {
     static String MODULE = "business";
     static String toDtoPath = "server\\src\\main\\java\\com\\slyk\\course\\server\\dto\\";
     static String toServicePath = "server\\src\\main\\java\\com\\slyk\\course\\server\\service\\";
+    static String toServiceImplPath = "server\\src\\main\\java\\com\\slyk\\course\\server\\service\\impl\\";
     static String toControllerPath = MODULE + "\\src\\main\\java\\com\\slyk\\course\\" + MODULE + "\\controller\\admin\\";
     static String generatorConfigPath = "server\\src\\main\\resources\\generator\\generatorConfig.xml";
 
@@ -57,6 +58,8 @@ public class ServerGenerator {
         // 生成service
         FreemarkerUtil.initConfig("service.ftl");
         FreemarkerUtil.generator(toServicePath + Domain + "Service.java", map);
+        FreemarkerUtil.initConfig("serviceImpl.ftl");
+        FreemarkerUtil.generator(toServiceImplPath + Domain + "ServiceImpl.java", map);
 
         // 生成controller
         FreemarkerUtil.initConfig("controller.ftl");

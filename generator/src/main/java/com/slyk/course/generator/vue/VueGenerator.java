@@ -13,6 +13,7 @@ import java.util.*;
 public class VueGenerator {
     static String MODULE = "business";
     static String toVuePath = "admin\\src\\views\\Admin\\";
+    static String toVueApiPath = "admin\\src\\api\\admin\\";
     static String generatorConfigPath = "server\\src\\main\\resources\\generator\\generatorConfig.xml";
 
     public static void main(String[] args) throws Exception {
@@ -48,9 +49,17 @@ public class VueGenerator {
         map.put("fieldList", fieldList);
         map.put("typeSet", typeSet);
 
+        // 生成vue的axios请求
+        FreemarkerUtil.initConfig("vueApi.ftl");
+        FreemarkerUtil.generator(toVueApiPath + domain + ".js", map);
         // 生成vue
         FreemarkerUtil.initConfig("vue.ftl");
-        FreemarkerUtil.generator(toVuePath + Domain + "\\" + Domain + ".vue", map);
+        String dirPath = toVuePath + Domain;
+        File dir = new File(dirPath);
+        if (!dir.exists()) {
+            dir.mkdirs();
+        }
+        FreemarkerUtil.generator(dirPath + "\\" + Domain + ".vue", map);
     }
 
     /**
