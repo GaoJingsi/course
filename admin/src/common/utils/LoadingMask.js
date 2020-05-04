@@ -3,21 +3,30 @@ import Vue from 'vue';
 
 
 const LoadingMask = Vue.extend(Loading);
-// const loadingMask = new LoadingMask({
-//     el: document.createElement('div'),
-//     data() {
-//         return {
-//             show: true
-//         }
-//     }
-// })
-const loadingMask = new LoadingMask()
+let loadingMask = new LoadingMask({
+    el: document.createElement('div'),
+    data() {
+        return {
+            show: true
+        }
+    }
+})
+// const loadingMask = new LoadingMask()
 
 const MaskLoading = {
 
     start() {
+        loadingMask = new LoadingMask({
+            el: document.createElement('div'),
+            data() {
+                return {
+                    show: true
+                }
+            }
+        })
         loadingMask.show = true
-        loadingMask.$mount('#loading')
+        // loadingMask.$mount('#loading')
+        document.body.appendChild(loadingMask.$el)
     },
 
     complete() {
