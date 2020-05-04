@@ -4,6 +4,7 @@ import com.slyk.course.server.bo.ResponseBo;
 import com.slyk.course.server.dto.ChapterDto;
 import com.slyk.course.server.dto.PageDto;
 import com.slyk.course.server.service.ChapterService;
+import com.slyk.course.server.utils.ValidatorUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -37,6 +38,12 @@ public class ChapterController {
 
     @RequestMapping(value = "", method = {RequestMethod.POST, RequestMethod.PUT})
     public ResponseBo<ChapterDto> saveOneChapter(@RequestBody ChapterDto chapterDto) {
+
+        // 保存校验
+        ValidatorUtil.require(chapterDto.getName(), "名称");
+        ValidatorUtil.require(chapterDto.getCourseId(), "课程ID");
+        ValidatorUtil.length(chapterDto.getCourseId(), "课程ID", 1, 8);
+
         try {
             chapterService.saveOneChapter(chapterDto);
             return ResponseBo

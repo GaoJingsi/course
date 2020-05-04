@@ -13,7 +13,7 @@ export function getChapterList(page = 1, size = 5) {
                 return Promise.resolve({data: data.data.data, msg: data.data.msg})
             }
 
-            return Promise.reject(data)
+            return Promise.reject(data.data)
         }).catch(resp => {
             return Promise.reject(resp)
         })
@@ -26,7 +26,7 @@ export function addOneChapter(chapter) {
                 return Promise.resolve(true)
             }
 
-            return Promise.reject(data)
+            return Promise.reject(data.data)
         }).catch(resp => {
             return Promise.reject(resp)
         })
@@ -39,7 +39,7 @@ export function editOneChapter(chapter) {
                 return Promise.resolve(true)
             }
 
-            return Promise.reject(data)
+            return Promise.reject(data.data)
         }).catch(resp => {
             return Promise.reject(resp)
         })
@@ -52,7 +52,7 @@ export function delOneChapter(id) {
                 return Promise.resolve(true)
             }
 
-            return Promise.reject(data)
+            return Promise.reject(data.data)
         }).catch(resp => {
             return Promise.reject(resp)
         })

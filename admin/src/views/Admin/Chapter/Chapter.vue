@@ -1943,6 +1943,7 @@
     import Pagination from "components/Pagination/Pagination";
     import {MessageBox, Swal} from "common/utils/SweetAlert2";
     import MaskLoading from "common/utils/LoadingMask";
+    import Validator from "common/utils/validator";
 
     export default {
         name: "Index",
@@ -1968,6 +1969,11 @@
                     _this.tableData = data.data
                     //由于数据的更新，等dom更新以后，$nextTick里的操作会被执行
                     _this.$nextTick(() => _this.$refs.pagination.render(page))
+                }).catch(reason => {
+                    new MessageBox({
+                        message: reason.msg,
+                        icon: 'error'
+                    }).toast()
                 })
             },
             paginationSelectChanged(currentPageSize) {
@@ -1993,20 +1999,48 @@
             },
             saveOneChapter() {
                 let _this = this;
-                addOneChapter(_this.chapterToEdit).then(success => {
-                    if (success) {
-                        _this.getChapterList(1, _this.currentPageConfig.tableSize)
-                        $('#saveModal').modal('hide')
-                    }
+
+                // 保存校验
+                if (!Validator.require(_this.chapterToEdit.name, "名称")
+                    || !Validator.require(_this.chapterToEdit.courseId, "课程ID")
+                    || !Validator.length(_this.chapterToEdit.courseId, "课程ID", 1, 8)) {
+                    return;
+                }
+
+                addOneChapter(_this.chapterToEdit)
+                    .then(success => {
+                        if (success) {
+                            _this.getChapterList(1, _this.currentPageConfig.tableSize)
+                            $('#saveModal').modal('hide')
+                        }
+                    }).catch(reason => {
+                    new MessageBox({
+                        message: reason.msg,
+                        icon: 'error'
+                    }).toast()
                 })
             },
             editOneChapter() {
                 let _this = this;
-                editOneChapter(_this.chapterToEdit).then(success => {
-                    if (success) {
-                        _this.getChapterList(1, _this.currentPageConfig.tableSize)
-                        $('#saveModal').modal('hide')
-                    }
+
+                // 保存校验
+                if (!Validator.require(_this.chapterToEdit.name, "名称")
+                    || !Validator.require(_this.chapterToEdit.courseId, "课程ID")
+                    || !Validator.length(_this.chapterToEdit.courseId, "课程ID", 1, 8)) {
+                    return;
+                }
+
+                editOneChapter(_this.chapterToEdit)
+                    .then(success => {
+                        if (success) {
+                            _this.getChapterList(1, _this.currentPageConfig.tableSize)
+                            $('#saveModal').modal('hide')
+                        }
+                    }).catch(reason => {
+                    new MessageBox({
+                        message: reason.msg,
+                        icon: 'error'
+                    }).toast()
                 })
             },
             delOneChapter(id) {
@@ -2019,24 +2053,20 @@
                             delOneChapter(id).then(success => {
                                 _this.getChapterList(1, _this.currentPageConfig.tableSize)
 
-                                setTimeout(function () {
-                                    MaskLoading.complete()
-                                    new MessageBox({
-                                        message: '删除成功！',
-                                        icon: 'success'
-                                    }).toast()
-                                }, 1000)
+                                MaskLoading.complete()
+                                new MessageBox({
+                                    message: '删除成功！',
+                                    icon: 'success'
+                                }).toast()
                             })
                             // For more information about handling dismissals please visit
                             // https://sweetalert2.github.io/#handling-dismissals
                         } else if (result.dismiss === Swal.DismissReason.cancel) {
-                            setTimeout(function () {
-                                MaskLoading.complete()
-                                new MessageBox({
-                                    message: '删除已取消！您的数据很安全。',
-                                    icon: 'info'
-                                }).alert()
-                            }, 1000)
+                            MaskLoading.complete()
+                            new MessageBox({
+                                message: '删除已取消！您的数据很安全。',
+                                icon: 'info'
+                            }).alert()
                         }
                     }
                 }).comfirm()
