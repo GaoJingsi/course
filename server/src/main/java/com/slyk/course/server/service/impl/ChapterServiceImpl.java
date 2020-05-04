@@ -33,13 +33,7 @@ public class ChapterServiceImpl implements ChapterService {
         List<Chapter> chapters = chapterMapper.selectByExample(null);
         PageInfo<Chapter> pageInfo = new PageInfo<>(chapters);
         pageDto.setTotal(pageInfo.getTotal());
-
-        List<ChapterDto> chapterDtos = new ArrayList<>();
-        for (int i = 0; i < chapters.size(); i++) {
-            ChapterDto chapterDto = new ChapterDto();
-            BeanUtils.copyProperties(chapters.get(i), chapterDto);
-            chapterDtos.add(chapterDto);
-        }
+        List<ChapterDto> chapterDtos = CopyUtil.copyList(chapters, ChapterDto.class);
         pageDto.setRows(chapterDtos);
     }
 
