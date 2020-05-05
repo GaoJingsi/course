@@ -132,7 +132,7 @@
                                     </div>
 
                                     <h3 class="search-title">
-                                        <a href="#" class="blue" :title="course.name">{{course.name}}</a>
+                                        <a href="javascript:void(0);" @click="jumpToChapterOfThisCourse(course.id)" class="blue" :title="course.name">{{course.name}}</a>
                                     </h3>
                                     <p class="summary" :title="course.summary">{{course.summary}}</p>
                                 </div>

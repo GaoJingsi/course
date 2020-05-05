@@ -38,7 +38,12 @@
 
         <div class="row">
             <div class="col-xs-12">
-                <h1>{{editingCourse.name}}</h1>
+                <h1 class="lighter">
+                    <i class="ace-icon fa fa-hand-o-right icon-animated-hand-pointer blue"></i>
+                    <router-link to="/business/course" class="pink">
+                        {{editingCourse.name}}
+                    </router-link>
+                </h1>
                 <P>
                     <button class="btn btn-white btn-default btn-round"
                             @click="$router.push({path:'/business/course'})" v-if="$route.params.courseId">
