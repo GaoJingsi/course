@@ -7,6 +7,7 @@ import com.slyk.course.server.domain.CourseExample;
 import com.slyk.course.server.dto.CourseDto;
 import com.slyk.course.server.dto.PageDto;
 import com.slyk.course.server.mapper.CourseMapper;
+import com.slyk.course.server.mapper.mine.MyCourseMapper;
 import com.slyk.course.server.service.CourseService;
 import com.slyk.course.server.utils.CopyUtil;
 import com.slyk.course.server.utils.UuidUtil;
@@ -28,6 +29,7 @@ public class CourseServiceImpl implements CourseService {
 
     @Resource
     private CourseMapper courseMapper;
+    private MyCourseMapper myCourseMapper;
 
     @Override
     public void getCourseList(PageDto<CourseDto> pageDto) {
@@ -75,5 +77,10 @@ public class CourseServiceImpl implements CourseService {
         Course course = courseMapper.selectByPrimaryKey(id);
         CourseDto courseDto = CopyUtil.copy(course, CourseDto.class);
         return courseDto;
+    }
+
+    @Override
+    public void udpateCourseTime(String courseId) {
+        myCourseMapper.updateCourseTime(courseId);
     }
 }

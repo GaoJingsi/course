@@ -8,6 +8,7 @@ import com.slyk.course.server.dto.SectionDto;
 import com.slyk.course.server.dto.PageDto;
 import com.slyk.course.server.dto.SectionPageDto;
 import com.slyk.course.server.mapper.SectionMapper;
+import com.slyk.course.server.mapper.mine.MyCourseMapper;
 import com.slyk.course.server.service.SectionService;
 import com.slyk.course.server.utils.CopyUtil;
 import com.slyk.course.server.utils.UuidUtil;
@@ -29,6 +30,9 @@ public class SectionServiceImpl implements SectionService {
 
     @Resource
     private SectionMapper sectionMapper;
+
+    @Resource
+    private MyCourseMapper myCourseMapper;
 
     @Override
     public void getSectionList(SectionPageDto pageDto) {
@@ -63,6 +67,7 @@ public class SectionServiceImpl implements SectionService {
             section.setUpdatedAt(new Date());
             sectionMapper.updateByPrimaryKey(section);
         }
+        myCourseMapper.updateCourseTime(sectionDto.getCourseId());
     }
 
     @Override

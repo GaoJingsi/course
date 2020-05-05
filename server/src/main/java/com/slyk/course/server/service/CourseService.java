@@ -12,5 +12,10 @@ public interface CourseService {
     void deleteOneCourse(String id) throws Exception;
 
     CourseDto getCourseById(String id);
+
+    /**
+     * 更新课程总时长
+     */
+    void udpateCourseTime(String courseId);
 }
 

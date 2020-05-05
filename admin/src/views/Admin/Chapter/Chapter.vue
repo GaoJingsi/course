@@ -107,7 +107,16 @@
                                     <ul class="dropdown-menu dropdown-only-icon dropdown-yellow dropdown-menu-right dropdown-caret dropdown-close">
                                         <li>
                                             <a href="javascript:void(0);" class="tooltip-success" data-rel="tooltip"
-                                               title="Edit" @click="showEditChapterDialog(chapter)">
+                                               title="跳转至小节" @click="jumpToSectionOfThisChapter(chapter.courseId,chapter.id)">
+																			<span class="green">
+																				<i class="ace-icon fa fa-desktop bigger-120"></i>
+																			</span>
+                                            </a>
+                                        </li>
+
+                                        <li>
+                                            <a href="javascript:void(0);" class="tooltip-success" data-rel="tooltip"
+                                               title="编辑" @click="showEditChapterDialog(chapter)">
 																			<span class="green">
 																				<i class="ace-icon fa fa-pencil-square-o bigger-120"></i>
 																			</span>
@@ -115,7 +124,7 @@
                                         </li>
 
                                         <li>
-                                            <a href="#" class="tooltip-error" data-rel="tooltip" title="Delete"
+                                            <a href="javascript:void(0);" class="tooltip-error" data-rel="tooltip" title="删除"
                                                @click="delOneChapter(chapter.id)">
 																			<span class="red">
 																				<i class="ace-icon fa fa-trash-o bigger-120"></i>
