@@ -385,6 +385,16 @@
                         <b class="arrow"></b>
 
                         <ul class="submenu">
+                            <li class="" id="business-course-sidebar">
+                                <router-link :to="{path:'/business/course'}" class="dropdown-toggle">
+                                    <i class="menu-icon fa fa-caret-right"></i>
+
+                                    课程管理
+                                    <b class="arrow fa fa-angle-down"></b>
+                                </router-link>
+
+                                <b class="arrow"></b>
+                            </li>
                             <li class="" id="business-chapter-sidebar">
                                 <router-link :to="{path:'/business/chapter'}" class="dropdown-toggle">
                                     <i class="menu-icon fa fa-caret-right"></i>
@@ -400,16 +410,6 @@
                                     <i class="menu-icon fa fa-caret-right"></i>
 
                                     小节管理
-                                    <b class="arrow fa fa-angle-down"></b>
-                                </router-link>
-
-                                <b class="arrow"></b>
-                            </li>
-                            <li class="" id="business-course-sidebar">
-                                <router-link :to="{path:'/business/course'}" class="dropdown-toggle">
-                                    <i class="menu-icon fa fa-caret-right"></i>
-
-                                    课程管理
                                     <b class="arrow fa fa-angle-down"></b>
                                 </router-link>
 
