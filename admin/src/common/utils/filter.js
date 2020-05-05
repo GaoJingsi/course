@@ -4,12 +4,12 @@
  * @param key 例如：C
  * @returns {string} 例如：收费
  */
-let optionKV = (object, key) =>  {
+let optionKV = (object, key) => {
     if (!object || !key) {
         return "";
     } else {
         let result = "";
-        for(let enums in object){
+        for (let enums in object) {
             if (key.toLowerCase() === object[enums]["key"].toLowerCase()) {
                 result = object[enums]["value"];
             }
@@ -23,7 +23,7 @@ let optionKV = (object, key) =>  {
  * @param key 例如：C
  * @returns {string} 例如：收费
  */
-let optionKVArray = (list, key) =>  {
+let optionKVArray = (list, key) => {
     if (!list || !key) {
         return "";
     } else {
@@ -89,8 +89,13 @@ let formatFileSize = (value) => {
     return result;
 };
 
+function substring(val, startIndex, length) {
+    return val.substr(startIndex, length)
+}
+
 export default {
     optionKV,
     formatSecond,
-    formatFileSize
+    formatFileSize,
+    substring
 }

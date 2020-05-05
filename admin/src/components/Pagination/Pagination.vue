@@ -30,7 +30,7 @@
         <label class="m--padding-10">
             每页
             <select @change="$emit('selectChanged', parseInt($event.target.value))">
-                <option v-for="(item, index) in items" :value="item" :key="index">{{item}}</option>
+                <option v-for="(item, index) in items" :value="item" :key="index" :selected="item===size ? 'selected' : ''">{{item}}</option>
             </select>
             条，共【{{total}}】条
         </label>
