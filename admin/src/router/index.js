@@ -14,11 +14,11 @@ const router = new Router({
         },
         {
             path: '/login',
-            component: () => import('views/Login/Index')
+            component: () => import('views/Login/Login')
         },
         {
             path: '/',
-            component: () => import('views/Admin/Index'),
+            component: () => import('views/Admin/Admin'),
             children: [
                 {
                     path: 'welcome',
