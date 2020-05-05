@@ -41,6 +41,27 @@ public class CourseController {
         }
     }
 
+    @GetMapping("/{id}")
+    public ResponseBo<CourseDto> getCourseList(@PathVariable("id") String id) {
+        try {
+            CourseDto courseDto = courseService.getCourseById(id);
+            return ResponseBo
+                    .<CourseDto>builder()
+                    .error_no(0)
+                    .data(courseDto)
+                    .msg("获取课程内容成功！")
+                    .build();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            return ResponseBo
+                    .<CourseDto>builder()
+                    .error_no(50000)
+                    .data(null)
+                    .msg("获取课程内容失败，出现异常！")
+                    .build();
+        }
+    }
+
     @RequestMapping(value = "", method = {RequestMethod.POST, RequestMethod.PUT})
     public ResponseBo<CourseDto> saveOneCourse(@RequestBody CourseDto courseDto) {
 

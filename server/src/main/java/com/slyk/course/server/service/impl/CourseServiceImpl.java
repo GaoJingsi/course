@@ -69,4 +69,11 @@ public class CourseServiceImpl implements CourseService {
             throw new Exception("删除了0条的记录！");
         }
     }
+
+    @Override
+    public CourseDto getCourseById(String id) {
+        Course course = courseMapper.selectByPrimaryKey(id);
+        CourseDto courseDto = CopyUtil.copy(course, CourseDto.class);
+        return courseDto;
+    }
 }
