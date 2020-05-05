@@ -1,11 +1,11 @@
 package com.slyk.course.server.service;
 
 import com.slyk.course.server.dto.SectionDto;
-import com.slyk.course.server.dto.PageDto;
+import com.slyk.course.server.dto.SectionPageDto;
 
 public interface SectionService {
 
-    void getSectionList(PageDto<SectionDto> pageDto);
+    void getSectionList(SectionPageDto pageDto);
 
     void saveOneSection(SectionDto sectionDto);
 

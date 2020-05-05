@@ -4,8 +4,10 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.slyk.course.server.domain.Chapter;
 import com.slyk.course.server.domain.ChapterExample;
+import com.slyk.course.server.domain.Course;
 import com.slyk.course.server.dto.ChapterDto;
 import com.slyk.course.server.dto.ChapterPageDto;
+import com.slyk.course.server.dto.CourseDto;
 import com.slyk.course.server.mapper.ChapterMapper;
 import com.slyk.course.server.service.ChapterService;
 import com.slyk.course.server.utils.CopyUtil;
@@ -62,5 +64,12 @@ public class ChapterServiceImpl implements ChapterService {
         } else if (i < 1) {
             throw new Exception("删除了0条的记录！");
         }
+    }
+
+    @Override
+    public ChapterDto getChapterById(String id) {
+        Chapter chapter = chapterMapper.selectByPrimaryKey(id);
+        ChapterDto chapterDto = CopyUtil.copy(chapter, ChapterDto.class);
+        return chapterDto;
     }
 }

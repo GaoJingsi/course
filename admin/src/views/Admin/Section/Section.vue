@@ -11,49 +11,50 @@
                     </div>
                     <div class="modal-body">
                         <form>
-                                        <div class="form-group">
-                                            <label for="title">标题</label>
-                                            <input type="text" v-model="sectionToEdit.title" class="form-control" id="title"
-                                                   placeholder="标题">
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="courseId">课程</label>
-                                            <input type="text" v-model="sectionToEdit.courseId" class="form-control" id="courseId"
-                                                   placeholder="课程">
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="chapterId">大章</label>
-                                            <input type="text" v-model="sectionToEdit.chapterId" class="form-control" id="chapterId"
-                                                   placeholder="大章">
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="video">视频</label>
-                                            <input type="text" v-model="sectionToEdit.video" class="form-control" id="video"
-                                                   placeholder="视频">
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="time">时长</label>
-                                            <input type="text" v-model="sectionToEdit.time" class="form-control" id="time"
-                                                   placeholder="时长">
-                                        </div>
+                            <div class="form-group">
+                                <label for="title">标题</label>
+                                <input type="text" v-model="sectionToEdit.title" class="form-control" id="title"
+                                       placeholder="标题">
+                            </div>
+                            <div class="form-group">
+                                <label for="courseName">课程</label>
+                                <input type="text" v-model="editingCourse.name" class="form-control" id="courseName"
+                                       placeholder="课程" readonly>
+                            </div>
+                            <div class="form-group">
+                                <label for="chapterName">大章</label>
+                                <input type="text" v-model="editingChapter.name" class="form-control" id="chapterName"
+                                       placeholder="课程" readonly>
+                            </div>
+                            <div class="form-group">
+                                <label for="video">视频</label>
+                                <input type="text" v-model="sectionToEdit.video" class="form-control" id="video"
+                                       placeholder="视频">
+                            </div>
+                            <div class="form-group">
+                                <label for="time">时长</label>
+                                <input type="text" v-model="sectionToEdit.time" class="form-control" id="time"
+                                       placeholder="时长">
+                            </div>
 
-                                        <div class="form-group">
-                                            <label for="charge">收费</label>
-                                            <select v-model="sectionToEdit.charge" class="form-control" id="charge">
-                                                <option v-for="o in COURSE_CHARGE" :value="o.key" :key="o.value">{{o.value}}</option>
-                                            </select>
-                                        </div>
+                            <div class="form-group">
+                                <label for="charge">收费</label>
+                                <select v-model="sectionToEdit.charge" class="form-control" id="charge">
+                                    <option v-for="o in COURSE_CHARGE" :value="o.key" :key="o.value">{{o.value}}
+                                    </option>
+                                </select>
+                            </div>
 
-                                        <div class="form-group">
-                                            <label for="sort">顺序</label>
-                                            <input type="text" v-model="sectionToEdit.sort" class="form-control" id="sort"
-                                                   placeholder="顺序">
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="vod">vod</label>
-                                            <input type="text" v-model="sectionToEdit.vod" class="form-control" id="vod"
-                                                   placeholder="vod">
-                                        </div>
+                            <div class="form-group">
+                                <label for="sort">顺序</label>
+                                <input type="text" v-model="sectionToEdit.sort" class="form-control" id="sort"
+                                       placeholder="顺序">
+                            </div>
+                            <div class="form-group">
+                                <label for="vod">vod</label>
+                                <input type="text" v-model="sectionToEdit.vod" class="form-control" id="vod"
+                                       placeholder="vod">
+                            </div>
                         </form>
                     </div>
                     <div class="modal-footer">
@@ -66,6 +67,22 @@
 
         <div class="row">
             <div class="col-xs-12">
+                <h1 class="lighter"
+                    v-if="(!!$route.query.courseId && $route.query.courseId!=='null') || (!!$route.query.chapterId && $route.query.chapterId!=='null')">
+                    <i class="ace-icon fa fa-hand-o-right icon-animated-hand-pointer blue"
+                       v-if="!!$route.query.courseId && $route.query.courseId!=='null'"></i>
+                    <router-link to="/business/course" class="pink"
+                                 v-if="!!$route.query.courseId && $route.query.courseId!=='null'">
+                        {{editingCourse.name}}
+                    </router-link>
+
+                    <i class="ace-icon fa fa-hand-o-right icon-animated-hand-pointer blue"
+                       v-if="!!$route.query.chapterId && $route.query.chapterId!=='null'"></i>
+                    <router-link :to="'/business/chapter/' + $route.query.courseId" class="pink"
+                                 v-if="!!$route.query.chapterId && $route.query.chapterId!=='null'">
+                        {{editingChapter.name}}
+                    </router-link>
+                </h1>
                 <P>
                     <button class="btn btn-white btn-default btn-round" @click="showEditSectionDialog(null)">
                         <i class="ace-icon fa fa-save red2"></i>
@@ -158,7 +175,9 @@
 </template>
 
 <script>
-    import {getSectionList, addOneSection, editOneSection, delOneSection} from "api/admin/section";
+    import {getSectionList, getSectionListByChapter, addOneSection, editOneSection, delOneSection} from "api/admin/section";
+    import {getCourseById} from "api/admin/course";
+    import {getChapterById} from "api/admin/chapter";
     import Pagination from "components/Pagination/Pagination";
     import {MessageBox, Swal} from "common/utils/SweetAlert2";
     import MaskLoading from "common/utils/LoadingMask";
@@ -180,6 +199,25 @@
                     sort: null,
                     vod: null,
                 },
+                editingCourse: {
+                    id: null,
+                    name: null,
+                    summary: null,
+                    time: null,
+                    price: null,
+                    image: null,
+                    level: null,
+                    charge: null,
+                    status: null,
+                    enroll: null,
+                    sort: null,
+                    teacherId: null,
+                },
+                editingChapter: {
+                    id: null,
+                    name: null,
+                    courseId: null,
+                },
                 currentPageConfig: {
                     tableSize: 5,
                     showLoading: false
@@ -190,16 +228,50 @@
         methods: {
             getSectionList(page, size) {
                 let _this = this;
-                getSectionList(page, size).then(data => {
-                    _this.tableData = data.data
-                    //由于数据的更新，等dom更新以后，$nextTick里的操作会被执行
-                    _this.$nextTick(() => _this.$refs.pagination.render(page))
-                }).catch(reason => {
-                    new MessageBox({
-                        message: reason.msg,
-                        icon: 'error'
-                    }).toast()
-                })
+                const courseId = _this.$route.query.courseId
+                const chapterId = _this.$route.query.chapterId
+                _this.sectionToEdit.courseId = courseId
+                _this.sectionToEdit.chapterId = chapterId
+
+                if (!chapterId) {
+                    getSectionList(page, size).then(data => {
+                        _this.tableData = data.data
+                        //由于数据的更新，等dom更新以后，$nextTick里的操作会被执行
+                        _this.$nextTick(() => _this.$refs.pagination.render(page))
+                    }).catch(reason => {
+                        new MessageBox({
+                            message: reason.msg,
+                            icon: 'error'
+                        }).toast()
+                    })
+                } else {
+                    getCourseById(courseId).then(data => {
+                        _this.editingCourse = data.data
+                    }).catch(reason => {
+                        new MessageBox({
+                            message: reason.msg,
+                            icon: 'error'
+                        }).toast()
+                    })
+                    getChapterById(chapterId).then(data => {
+                        _this.editingChapter = data.data
+                    }).catch(reason => {
+                        new MessageBox({
+                            message: reason.msg,
+                            icon: 'error'
+                        }).toast()
+                    })
+                    getSectionListByChapter(page, size, chapterId).then(data => {
+                        _this.tableData = data.data
+                        //由于数据的更新，等dom更新以后，$nextTick里的操作会被执行
+                        _this.$nextTick(() => _this.$refs.pagination.render(page))
+                    }).catch(reason => {
+                        new MessageBox({
+                            message: reason.msg,
+                            icon: 'error'
+                        }).toast()
+                    })
+                }
             },
             paginationSelectChanged(currentPageSize) {
                 let _this = this;
@@ -214,15 +286,17 @@
                     _this.sectionToEdit = Object.assign({}, section)
                 } else {
 
+                    const courseId = _this.$route.query.courseId
+                    const chapterId = _this.$route.query.chapterId
                     _this.sectionToEdit = {
-                    title: null,
-                    courseId: null,
-                    chapterId: null,
-                    video: null,
-                    time: null,
-                    charge: null,
-                    sort: null,
-                    vod: null,
+                        title: null,
+                        courseId: courseId,
+                        chapterId: chapterId,
+                        video: null,
+                        time: null,
+                        charge: null,
+                        sort: null,
+                        vod: null,
                     }
                 }
                 $('#saveModal').modal('show')

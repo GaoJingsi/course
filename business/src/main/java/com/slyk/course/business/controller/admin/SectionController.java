@@ -2,7 +2,7 @@ package com.slyk.course.business.controller.admin;
 
 import com.slyk.course.server.bo.ResponseBo;
 import com.slyk.course.server.dto.SectionDto;
-import com.slyk.course.server.dto.PageDto;
+import com.slyk.course.server.dto.SectionPageDto;
 import com.slyk.course.server.service.SectionService;
 import com.slyk.course.server.utils.ValidatorUtil;
 import org.slf4j.Logger;
@@ -21,11 +21,11 @@ public class SectionController {
     private SectionService sectionService;
 
     @GetMapping("")
-    public ResponseBo<PageDto<SectionDto>> getSectionList(PageDto<SectionDto> pageDto) {
+    public ResponseBo<SectionPageDto> getSectionList(SectionPageDto pageDto) {
         try {
             sectionService.getSectionList(pageDto);
             return ResponseBo
-                    .<PageDto<SectionDto>>builder()
+                    .<SectionPageDto>builder()
                     .error_no(0)
                     .data(pageDto)
                     .msg("获取小节内容成功！")
@@ -33,7 +33,7 @@ public class SectionController {
         } catch (Exception ex) {
             ex.printStackTrace();
             return ResponseBo
-                    .<PageDto<SectionDto>>builder()
+                    .<SectionPageDto>builder()
                     .error_no(50000)
                     .data(pageDto)
                     .msg("获取小节内容失败，出现异常！")
@@ -69,7 +69,7 @@ public class SectionController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseBo<Boolean> deleteOneSection(@PathVariable("id") String id){
+    public ResponseBo<Boolean> deleteOneSection(@PathVariable("id") String id) {
         try {
             sectionService.deleteOneSection(id);
             return ResponseBo

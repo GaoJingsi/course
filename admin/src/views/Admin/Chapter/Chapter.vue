@@ -38,7 +38,7 @@
 
         <div class="row">
             <div class="col-xs-12">
-                <h1 class="lighter">
+                <h1 class="lighter" v-if="(!!$route.params.courseId && $route.params.courseId!=='null')">
                     <i class="ace-icon fa fa-hand-o-right icon-animated-hand-pointer blue"></i>
                     <router-link to="/business/course" class="pink">
                         {{editingCourse.name}}
@@ -80,12 +80,20 @@
                         <td>{{chapter.courseId}}</td>
                         <td>
                             <div class="hidden-sm hidden-xs btn-group">
+                                <button class="btn btn-xs btn-success"
+                                        @click="jumpToSectionOfThisChapter(chapter.courseId,chapter.id)">
+                                    <i class="ace-icon fa fa-desktop bigger-120"></i>
+                                    小节
+                                </button>
+
                                 <button class="btn btn-xs btn-info" @click="showEditChapterDialog(chapter)">
                                     <i class="ace-icon fa fa-pencil bigger-120"></i>
+                                    编辑
                                 </button>
 
                                 <button class="btn btn-xs btn-danger" @click="delOneChapter(chapter.id)">
                                     <i class="ace-icon fa fa-trash-o bigger-120"></i>
+                                    删除
                                 </button>
                             </div>
 
@@ -307,6 +315,9 @@
                         }
                     }
                 }).comfirm()
+            },
+            jumpToSectionOfThisChapter(courseId, chapterId) {
+                this.$router.push({path: '/business/section?courseId=' + courseId + '&chapterId=' + chapterId})
             }
         },
         created() {

@@ -11,4 +11,6 @@ public interface ChapterService {
     void saveOneChapter(ChapterDto chapterDto);
 
     void deleteOneChapter(String id) throws Exception;
+
+    ChapterDto getChapterById(String id);
 }

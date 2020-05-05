@@ -6,6 +6,7 @@ import com.slyk.course.server.domain.Section;
 import com.slyk.course.server.domain.SectionExample;
 import com.slyk.course.server.dto.SectionDto;
 import com.slyk.course.server.dto.PageDto;
+import com.slyk.course.server.dto.SectionPageDto;
 import com.slyk.course.server.mapper.SectionMapper;
 import com.slyk.course.server.service.SectionService;
 import com.slyk.course.server.utils.CopyUtil;
@@ -30,10 +31,14 @@ public class SectionServiceImpl implements SectionService {
     private SectionMapper sectionMapper;
 
     @Override
-    public void getSectionList(PageDto<SectionDto> pageDto) {
+    public void getSectionList(SectionPageDto pageDto) {
         PageHelper.startPage(pageDto.getPage(), pageDto.getSize());
         SectionExample sectionExample = new SectionExample();
         sectionExample.setOrderByClause("sort asc");
+        SectionExample.Criteria criteria = sectionExample.createCriteria();
+        if (!StringUtils.isEmpty(pageDto.getChapterId())) {
+            criteria.andChapterIdEqualTo(pageDto.getChapterId());
+        }
         List<Section> sections = sectionMapper.selectByExample(sectionExample);
         PageInfo<Section> pageInfo = new PageInfo<>(sections);
         pageDto.setTotal(pageInfo.getTotal());

@@ -19,6 +19,25 @@ export function getSectionList(page = 1, size = 5) {
         })
 }
 
+export function getSectionListByChapter(page = 1, size = 5, chapterId) {
+    return axios.get(BASE_URL + 'business/admin/section', {
+        params: {
+            page,
+            size,
+            chapterId
+        }
+    })
+        .then(data => {
+            if (data.data.error_no === 0) {
+                return Promise.resolve({data: data.data.data, msg: data.data.msg})
+            }
+
+            return Promise.reject(data.data)
+        }).catch(resp => {
+            return Promise.reject(resp)
+        })
+}
+
 export function addOneSection(section) {
     return axios.post(BASE_URL + 'business/admin/section', section)
         .then(data => {

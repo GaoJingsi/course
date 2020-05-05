@@ -83,10 +83,12 @@
                             <div class="hidden-sm hidden-xs btn-group">
                                 <button class="btn btn-xs btn-info" @click="showEdit${Domain}Dialog(${domain})">
                                     <i class="ace-icon fa fa-pencil bigger-120"></i>
+                                    编辑
                                 </button>
 
                                 <button class="btn btn-xs btn-danger" @click="delOne${Domain}(${domain}.id)">
                                     <i class="ace-icon fa fa-trash-o bigger-120"></i>
+                                    删除
                                 </button>
                             </div>
 
