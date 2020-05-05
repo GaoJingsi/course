@@ -19,6 +19,19 @@ export function getCourseList(page = 1, size = 5) {
         })
 }
 
+export function getCourseById(id) {
+    return axios.get(BASE_URL + 'business/admin/course' + (id ? '/' + id : ''))
+        .then(data => {
+            if (data.data.error_no === 0) {
+                return Promise.resolve({data: data.data.data, msg: data.data.msg})
+            }
+
+            return Promise.reject(data.data)
+        }).catch(resp => {
+            return Promise.reject(resp)
+        })
+}
+
 export function addOneCourse(course) {
     return axios.post(BASE_URL + 'business/admin/course', course)
         .then(data => {

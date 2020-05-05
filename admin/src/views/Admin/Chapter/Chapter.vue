@@ -16,10 +16,15 @@
                                 <input type="text" v-model="chapterToEdit.name" class="form-control" id="name"
                                        placeholder="大章名称">
                             </div>
-                            <div class="form-group">
+                            <div class="form-group" v-if="!editingCourse.id">
                                 <label for="courseId">课程ID</label>
                                 <input type="text" v-model="chapterToEdit.courseId" class="form-control" id="courseId"
                                        placeholder="课程ID">
+                            </div>
+                            <div class="form-group" v-else>
+                                <label for="courseId">课程名称</label>
+                                <input type="text" v-model="editingCourse.name" class="form-control" id="courseName"
+                                       placeholder="课程名称" readonly>
                             </div>
                         </form>
                     </div>
@@ -113,7 +118,14 @@
 </template>
 
 <script>
-    import {getChapterList, addOneChapter, editOneChapter, delOneChapter} from "api/admin/chapter";
+    import {
+        getChapterList,
+        getChapterListByCourse,
+        addOneChapter,
+        editOneChapter,
+        delOneChapter
+    } from "api/admin/chapter";
+    import {getCourseById} from "api/admin/course";
     import Pagination from "components/Pagination/Pagination";
     import {MessageBox, Swal} from "common/utils/SweetAlert2";
     import MaskLoading from "common/utils/LoadingMask";
@@ -130,6 +142,20 @@
                     name: null,
                     courseId: null
                 },
+                editingCourse: {
+                    id: null,
+                    name: null,
+                    summary: null,
+                    time: null,
+                    price: null,
+                    image: null,
+                    level: null,
+                    charge: null,
+                    status: null,
+                    enroll: null,
+                    sort: null,
+                    teacherId: null,
+                },
                 currentPageConfig: {
                     tableSize: 5,
                     showLoading: false
@@ -139,16 +165,40 @@
         methods: {
             getChapterList(page, size) {
                 let _this = this;
-                getChapterList(page, size).then(data => {
-                    _this.tableData = data.data
-                    //由于数据的更新，等dom更新以后，$nextTick里的操作会被执行
-                    _this.$nextTick(() => _this.$refs.pagination.render(page))
-                }).catch(reason => {
-                    new MessageBox({
-                        message: reason.msg,
-                        icon: 'error'
-                    }).toast()
-                })
+                const courseId = _this.$route.params.courseId
+                _this.chapterToEdit.courseId = courseId
+                if (!courseId) {
+                    getChapterList(page, size).then(data => {
+                        _this.tableData = data.data
+                        //由于数据的更新，等dom更新以后，$nextTick里的操作会被执行
+                        _this.$nextTick(() => _this.$refs.pagination.render(page))
+                    }).catch(reason => {
+                        new MessageBox({
+                            message: reason.msg,
+                            icon: 'error'
+                        }).toast()
+                    })
+                } else {
+                    getCourseById(courseId).then(data => {
+                        _this.editingCourse = data.data
+                    }).catch(reason => {
+                        new MessageBox({
+                            message: reason.msg,
+                            icon: 'error'
+                        }).toast()
+                    })
+                    getChapterListByCourse(page, size, courseId).then(data => {
+                        _this.tableData = data.data
+
+                        //由于数据的更新，等dom更新以后，$nextTick里的操作会被执行
+                        _this.$nextTick(() => _this.$refs.pagination.render(page))
+                    }).catch(reason => {
+                        new MessageBox({
+                            message: reason.msg,
+                            icon: 'error'
+                        }).toast()
+                    })
+                }
             },
             paginationSelectChanged(currentPageSize) {
                 let _this = this;
@@ -163,10 +213,11 @@
                     _this.chapterToEdit = Object.assign({}, chapter)
                 } else {
 
+                    const courseId = _this.$route.params.courseId
                     _this.chapterToEdit = {
                         id: null,
                         name: null,
-                        courseId: null
+                        courseId: courseId
                     }
                 }
                 $('#saveModal').modal('show')

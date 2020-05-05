@@ -2,6 +2,7 @@ package com.slyk.course.business.controller.admin;
 
 import com.slyk.course.server.bo.ResponseBo;
 import com.slyk.course.server.dto.ChapterDto;
+import com.slyk.course.server.dto.ChapterPageDto;
 import com.slyk.course.server.dto.PageDto;
 import com.slyk.course.server.service.ChapterService;
 import com.slyk.course.server.utils.ValidatorUtil;
@@ -21,7 +22,7 @@ public class ChapterController {
     private ChapterService chapterService;
 
     @GetMapping("")
-    public ResponseBo<PageDto<ChapterDto>> getChapterList(PageDto<ChapterDto> pageDto) {
+    public ResponseBo<PageDto<ChapterDto>> getChapterList(ChapterPageDto pageDto) {
         try {
             chapterService.getChapterList(pageDto);
             return ResponseBo
@@ -69,7 +70,7 @@ public class ChapterController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseBo<Boolean> deleteOneChapter(@PathVariable("id") String id){
+    public ResponseBo<Boolean> deleteOneChapter(@PathVariable("id") String id) {
         try {
             chapterService.deleteOneChapter(id);
             return ResponseBo

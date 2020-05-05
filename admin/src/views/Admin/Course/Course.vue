@@ -11,70 +11,72 @@
                     </div>
                     <div class="modal-body">
                         <form>
-                                        <div class="form-group">
-                                            <label for="name">名称</label>
-                                            <input type="text" v-model="courseToEdit.name" class="form-control" id="name"
-                                                   placeholder="名称">
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="summary">概述</label>
-                                            <input type="text" v-model="courseToEdit.summary" class="form-control" id="summary"
-                                                   placeholder="概述">
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="time">时长</label>
-                                            <input type="text" v-model="courseToEdit.time" class="form-control" id="time"
-                                                   placeholder="时长">
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="price">价格（元）</label>
-                                            <input type="text" v-model="courseToEdit.price" class="form-control" id="price"
-                                                   placeholder="价格（元）">
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="image">封面</label>
-                                            <input type="text" v-model="courseToEdit.image" class="form-control" id="image"
-                                                   placeholder="封面">
-                                        </div>
+                            <div class="form-group">
+                                <label for="name">名称</label>
+                                <input type="text" v-model="courseToEdit.name" class="form-control" id="name"
+                                       placeholder="名称">
+                            </div>
+                            <div class="form-group">
+                                <label for="summary">概述</label>
+                                <input type="text" v-model="courseToEdit.summary" class="form-control" id="summary"
+                                       placeholder="概述">
+                            </div>
+                            <div class="form-group">
+                                <label for="time">时长</label>
+                                <input type="text" v-model="courseToEdit.time" class="form-control" id="time"
+                                       placeholder="时长">
+                            </div>
+                            <div class="form-group">
+                                <label for="price">价格（元）</label>
+                                <input type="text" v-model="courseToEdit.price" class="form-control" id="price"
+                                       placeholder="价格（元）">
+                            </div>
+                            <div class="form-group">
+                                <label for="image">封面</label>
+                                <input type="text" v-model="courseToEdit.image" class="form-control" id="image"
+                                       placeholder="封面">
+                            </div>
 
-                                        <div class="form-group">
-                                            <label for="level">级别</label>
-                                            <select v-model="courseToEdit.level" class="form-control" id="level">
-                                                <option v-for="o in COURSE_LEVEL" :value="o.key" :key="o.value">{{o.value}}</option>
-                                            </select>
-                                        </div>
-
-
-                                        <div class="form-group">
-                                            <label for="charge">收费</label>
-                                            <select v-model="courseToEdit.charge" class="form-control" id="charge">
-                                                <option v-for="o in COURSE_CHARGE" :value="o.key" :key="o.value">{{o.value}}</option>
-                                            </select>
-                                        </div>
+                            <div class="form-group">
+                                <label for="level">级别</label>
+                                <select v-model="courseToEdit.level" class="form-control" id="level">
+                                    <option v-for="o in COURSE_LEVEL" :value="o.key" :key="o.value">{{o.value}}</option>
+                                </select>
+                            </div>
 
 
-                                        <div class="form-group">
-                                            <label for="status">状态</label>
-                                            <select v-model="courseToEdit.status" class="form-control" id="status">
-                                                <option v-for="o in COURSE_STATUS" :value="o.key" :key="o.value">{{o.value}}</option>
-                                            </select>
-                                        </div>
+                            <div class="form-group">
+                                <label for="charge">收费</label>
+                                <select v-model="courseToEdit.charge" class="form-control" id="charge">
+                                    <option v-for="o in COURSE_CHARGE" :value="o.key" :key="o.value">{{o.value}}
+                                    </option>
+                                </select>
+                            </div>
 
-                                        <div class="form-group">
-                                            <label for="enroll">报名数</label>
-                                            <input type="text" v-model="courseToEdit.enroll" class="form-control" id="enroll"
-                                                   placeholder="报名数">
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="sort">顺序</label>
-                                            <input type="text" v-model="courseToEdit.sort" class="form-control" id="sort"
-                                                   placeholder="顺序">
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="teacherId">讲师</label>
-                                            <input type="text" v-model="courseToEdit.teacherId" class="form-control" id="teacherId"
-                                                   placeholder="讲师">
-                                        </div>
+
+                            <div class="form-group">
+                                <label for="status">状态</label>
+                                <select v-model="courseToEdit.status" class="form-control" id="status">
+                                    <option v-for="o in COURSE_STATUS" :value="o.key" :key="o.value">{{o.value}}
+                                    </option>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="enroll">报名数</label>
+                                <input type="text" v-model="courseToEdit.enroll" class="form-control" id="enroll"
+                                       placeholder="报名数">
+                            </div>
+                            <div class="form-group">
+                                <label for="sort">顺序</label>
+                                <input type="text" v-model="courseToEdit.sort" class="form-control" id="sort"
+                                       placeholder="顺序">
+                            </div>
+                            <div class="form-group">
+                                <label for="teacherId">讲师</label>
+                                <input type="text" v-model="courseToEdit.teacherId" class="form-control" id="teacherId"
+                                       placeholder="讲师">
+                            </div>
                         </form>
                     </div>
                     <div class="modal-footer">
@@ -101,11 +103,16 @@
                 </P>
                 <div class="row">
                     <div class="col-xs-12">
-                        <div class="col-xs-6 col-sm-4 col-md-3 one-course" v-for="course in tableData.rows" :key="course.id">
+                        <div class="col-xs-6 col-sm-4 col-md-3 one-course" v-for="course in tableData.rows"
+                             :key="course.id">
                             <div class="thumbnail search-thumbnail one-course-inner">
-                                <span class="search-promotion label label-success arrowed-in arrowed-in-right" v-if="course.time">{{course.time | formatSecond}}</span>
+                                <span class="search-promotion label label-success arrowed-in arrowed-in-right"
+                                      v-if="course.time">{{course.time | formatSecond}}</span>
 
-                                <img v-if="!course.image" class="media-object" data-src="holder.js/100px200?theme=gray" alt="100%x200" style="height: 200px; width: 100%; display: block;" src="data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%22284%22%20height%3D%22200%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20284%20200%22%20preserveAspectRatio%3D%22none%22%3E%3Cdefs%3E%3Cstyle%20type%3D%22text%2Fcss%22%3E%23holder_171e2a0c082%20text%20%7B%20fill%3A%23AAAAAA%3Bfont-weight%3Abold%3Bfont-family%3AArial%2C%20Helvetica%2C%20Open%20Sans%2C%20sans-serif%2C%20monospace%3Bfont-size%3A14pt%20%7D%20%3C%2Fstyle%3E%3C%2Fdefs%3E%3Cg%20id%3D%22holder_171e2a0c082%22%3E%3Crect%20width%3D%22284%22%20height%3D%22200%22%20fill%3D%22%23EEEEEE%22%3E%3C%2Frect%3E%3Cg%3E%3Ctext%20x%3D%22105.671875%22%20y%3D%22106.3%22%3E284x200%3C%2Ftext%3E%3C%2Fg%3E%3C%2Fg%3E%3C%2Fsvg%3E" data-holder-rendered="true">
+                                <img v-if="!course.image" class="media-object" data-src="holder.js/100px200?theme=gray"
+                                     alt="100%x200" style="height: 200px; width: 100%; display: block;"
+                                     src="data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%22284%22%20height%3D%22200%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20284%20200%22%20preserveAspectRatio%3D%22none%22%3E%3Cdefs%3E%3Cstyle%20type%3D%22text%2Fcss%22%3E%23holder_171e2a0c082%20text%20%7B%20fill%3A%23AAAAAA%3Bfont-weight%3Abold%3Bfont-family%3AArial%2C%20Helvetica%2C%20Open%20Sans%2C%20sans-serif%2C%20monospace%3Bfont-size%3A14pt%20%7D%20%3C%2Fstyle%3E%3C%2Fdefs%3E%3Cg%20id%3D%22holder_171e2a0c082%22%3E%3Crect%20width%3D%22284%22%20height%3D%22200%22%20fill%3D%22%23EEEEEE%22%3E%3C%2Frect%3E%3Cg%3E%3Ctext%20x%3D%22105.671875%22%20y%3D%22106.3%22%3E284x200%3C%2Ftext%3E%3C%2Fg%3E%3C%2Fg%3E%3C%2Fsvg%3E"
+                                     data-holder-rendered="true">
                                 <img v-else :src="course.image" :alt="course.name">
                                 <div class="caption">
                                     <div class="clearfix">
@@ -132,6 +139,11 @@
                                 <div class="row">
                                     <div class="col-xs-12">
                                         <div class="hidden-sm hidden-xs btn-group">
+                                            <button class="btn btn-xs btn-info"
+                                                    @click="jumpToChapterOfThisCourse(course.id)">
+                                                <i class="ace-icon fa fa-book bigger-120"></i>
+                                            </button>
+
                                             <button class="btn btn-xs btn-info" @click="showEditCourseDialog(course)">
                                                 <i class="ace-icon fa fa-pencil bigger-120"></i>
                                             </button>
@@ -143,15 +155,28 @@
 
                                         <div class="hidden-md hidden-lg">
                                             <div class="inline pos-rel">
-                                                <button class="btn btn-minier btn-primary dropdown-toggle" data-toggle="dropdown"
+                                                <button class="btn btn-minier btn-primary dropdown-toggle"
+                                                        data-toggle="dropdown"
                                                         data-position="auto">
                                                     <i class="ace-icon fa fa-cog icon-only bigger-110"></i>
                                                 </button>
 
                                                 <ul class="dropdown-menu dropdown-only-icon dropdown-yellow dropdown-menu-right dropdown-caret dropdown-close">
                                                     <li>
-                                                        <a href="javascript:void(0);" class="tooltip-success" data-rel="tooltip"
-                                                           title="Edit" @click="showEditCourseDialog(course)">
+                                                        <a href="javascript:void(0);" class="tooltip-success"
+                                                           data-rel="tooltip"
+                                                           title="转至该课程大章管理"
+                                                           @click="jumpToChapterOfThisCourse(course.id)">
+																			<span class="green">
+																				<i class="ace-icon fa fa-book bigger-120"></i>
+																			</span>
+                                                        </a>
+                                                    </li>
+
+                                                    <li>
+                                                        <a href="javascript:void(0);" class="tooltip-success"
+                                                           data-rel="tooltip"
+                                                           title="编辑" @click="showEditCourseDialog(course)">
 																			<span class="green">
 																				<i class="ace-icon fa fa-pencil-square-o bigger-120"></i>
 																			</span>
@@ -159,7 +184,7 @@
                                                     </li>
 
                                                     <li>
-                                                        <a href="#" class="tooltip-error" data-rel="tooltip" title="Delete"
+                                                        <a href="#" class="tooltip-error" data-rel="tooltip" title="删除"
                                                            @click="delOneCourse(course.id)">
 																			<span class="red">
 																				<i class="ace-icon fa fa-trash-o bigger-120"></i>
@@ -248,17 +273,17 @@
                 } else {
 
                     _this.courseToEdit = {
-                    name: null,
-                    summary: null,
-                    time: null,
-                    price: null,
-                    image: null,
-                    level: null,
-                    charge: null,
-                    status: null,
-                    enroll: null,
-                    sort: null,
-                    teacherId: null,
+                        name: null,
+                        summary: null,
+                        time: null,
+                        price: null,
+                        image: null,
+                        level: null,
+                        charge: null,
+                        status: null,
+                        enroll: null,
+                        sort: null,
+                        teacherId: null,
                     }
                 }
                 $('#saveModal').modal('show')
@@ -342,6 +367,9 @@
                         }
                     }
                 }).comfirm()
+            },
+            jumpToChapterOfThisCourse(courseId) {
+                this.$router.push({path: '/business/chapter/' + courseId})
             }
         },
         created() {
@@ -356,6 +384,7 @@
     .one-course
         .one-course-inner
             height 350px
+
     .summary, .search-title
         white-space nowrap
         text-overflow ellipsis

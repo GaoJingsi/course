@@ -28,7 +28,7 @@ const router = new Router({
                     component: () => import('views/Admin/Welcome/Welcome')
                 },
                 {
-                    path: 'business/chapter',
+                    path: 'business/chapter/:courseId?',
                     meta: {
                         sidebarId: 'business-chapter-sidebar'
                     },

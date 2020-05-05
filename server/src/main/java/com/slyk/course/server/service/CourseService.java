@@ -10,5 +10,7 @@ public interface CourseService {
     void saveOneCourse(CourseDto courseDto);
 
     void deleteOneCourse(String id) throws Exception;
+
+    CourseDto getCourseById(String id);
 }
 
