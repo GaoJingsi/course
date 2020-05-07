@@ -28,6 +28,13 @@ const router = new Router({
                     component: () => import('views/Admin/Welcome/Welcome')
                 },
                 {
+                    path: 'business/category',
+                    meta: {
+                        sidebarId: 'business-category-sidebar'
+                    },
+                    component: () => import('views/Admin/Category/Category')
+                },
+                {
                     path: 'business/chapter/:courseId?',
                     meta: {
                         sidebarId: 'business-chapter-sidebar'
