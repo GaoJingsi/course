@@ -19,6 +19,19 @@ export function getCategoryList(page = 1, size = 5) {
         })
 }
 
+export function getCategoryAllList() {
+    return axios.get(BASE_URL + 'business/admin/category/all')
+        .then(data => {
+            if (data.data.error_no === 0) {
+                return Promise.resolve({data: data.data.data, msg: data.data.msg})
+            }
+
+            return Promise.reject(data.data)
+        }).catch(resp => {
+            return Promise.reject(resp)
+        })
+}
+
 export function addOneCategory(category) {
     return axios.post(BASE_URL + 'business/admin/category', category)
         .then(data => {
@@ -45,8 +58,8 @@ export function editOneCategory(category) {
         })
 }
 
-export function delOneCategory(id) {
-    return axios.delete(BASE_URL + 'business/admin/category/' + id)
+export function delOneCategoryWithChildren(id) {
+    return axios.delete(BASE_URL + 'business/admin/category/with-children/' + id)
         .then(data => {
             if (data.data.error_no === 0) {
                 return Promise.resolve(true)

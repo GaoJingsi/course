@@ -62,4 +62,25 @@ public class CategoryServiceImpl implements CategoryService {
             throw new Exception("删除了0条的记录！");
         }
     }
+
+    @Override
+    public List<CategoryDto> getCategoryAllList() {
+        List<Category> categories = categoryMapper.selectByExample(null);
+        List<CategoryDto> categoryDtos = CopyUtil.copyList(categories, CategoryDto.class);
+        return categoryDtos;
+    }
+
+    @Override
+    public void deleteOneCategoryWidthChildren(String id) throws Exception {
+        int i = categoryMapper.deleteByPrimaryKey(id);
+        CategoryExample categoryExample = new CategoryExample();
+        CategoryExample.Criteria criteria = categoryExample.createCriteria();
+        criteria.andParentEqualTo(id);
+        categoryMapper.deleteByExample(categoryExample);
+        if (i > 1) {
+            throw new Exception("删除了2条或以上的一级分类！");
+        } else if (i < 1) {
+            throw new Exception("删除了0条的一级分类！");
+        }
+    }
 }

@@ -10,6 +10,9 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @RestController
 @RequestMapping("/admin/category")
 public class CategoryController {
@@ -36,6 +39,27 @@ public class CategoryController {
                     .<PageDto<CategoryDto>>builder()
                     .error_no(50000)
                     .data(pageDto)
+                    .msg("获取分类内容失败，出现异常！")
+                    .build();
+        }
+    }
+
+    @GetMapping("/all")
+    public ResponseBo<List<CategoryDto>> getCategoryAllList() {
+        try {
+            List<CategoryDto> list = categoryService.getCategoryAllList();
+            return ResponseBo
+                    .<List<CategoryDto>>builder()
+                    .error_no(0)
+                    .data(list)
+                    .msg("获取分类内容成功！")
+                    .build();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            return ResponseBo
+                    .<List<CategoryDto>>builder()
+                    .error_no(50000)
+                    .data(new ArrayList<>())
                     .msg("获取分类内容失败，出现异常！")
                     .build();
         }
@@ -69,9 +93,30 @@ public class CategoryController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseBo<Boolean> deleteOneCategory(@PathVariable("id") String id){
+    public ResponseBo<Boolean> deleteOneCategory(@PathVariable("id") String id) {
         try {
             categoryService.deleteOneCategory(id);
+            return ResponseBo
+                    .<Boolean>builder()
+                    .error_no(0)
+                    .data(true)
+                    .msg("删除成功！")
+                    .build();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseBo
+                    .<Boolean>builder()
+                    .error_no(0)
+                    .data(true)
+                    .msg(e.getMessage())
+                    .build();
+        }
+    }
+
+    @DeleteMapping("/with-children/{id}")
+    public ResponseBo<Boolean> deleteOneCategoryWithChilren(@PathVariable("id") String id) {
+        try {
+            categoryService.deleteOneCategoryWidthChildren(id);
             return ResponseBo
                     .<Boolean>builder()
                     .error_no(0)

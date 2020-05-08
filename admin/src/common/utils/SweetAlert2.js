@@ -54,7 +54,7 @@ class MessageBox {
     }
 
     alert() {
-        Swal.fire(
+        return Swal.fire(
             this.options.title,
             this.options.message,
             this.options.icon
@@ -62,7 +62,7 @@ class MessageBox {
     }
 
     toast() {
-        Swal.fire({
+        return Swal.fire({
             position: 'top-end',
             icon: this.options.icon,
             title: this.options.message,
