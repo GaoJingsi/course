@@ -12,11 +12,6 @@
                     <div class="modal-body">
                         <form>
                             <div class="form-group">
-                                <label for="parent">父id</label>
-                                <input type="text" v-model="categoryToEdit.parent" class="form-control" id="parent"
-                                       placeholder="父id">
-                            </div>
-                            <div class="form-group">
                                 <label for="name">名称</label>
                                 <input type="text" v-model="categoryToEdit.name" class="form-control" id="name"
                                        placeholder="名称">
@@ -277,7 +272,7 @@
                 } else {
 
                     _this.categoryToEdit = {
-                        parent: null,
+                        parent: '00000000',
                         name: null,
                         sort: null,
                     }
