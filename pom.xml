@@ -53,7 +53,7 @@
             <dependency>
                 <groupId>mysql</groupId>
                 <artifactId>mysql-connector-java</artifactId>
-                <version>8.0.20</version>
+                <version>8.0.28</version>
             </dependency>
             <!-- https://mvnrepository.com/artifact/com.github.pagehelper/pagehelper-spring-boot-starter -->
             <dependency>
@@ -115,7 +115,7 @@
                         <groupId>mysql</groupId>
                         <artifactId>mysql-connector-java</artifactId>
                         <!--这里必须加版本，不然下载不了jar包-->
-                        <version>8.0.20</version>
+                        <version>8.0.28</version>
                     </dependency>
                 </dependencies>
             </plugin>
